@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>Contact Me</title>
+    </h:head>
+    <h:body>
+        <h:form id="employeeForm">
+            <h1>#{msgs.title}</h1>
+            <br/>
+            <h:messages globalOnly="true" errorStyle="color: red" infoStyle="color: green"/>
+            <br/>
+            <h:dataTable id="empTable" var="emp"
+                         border="1" value="#{employeeController.company.getEmployees()}"
+                         rendered="#{employeeController.company.getEmployees().size() > 0}">
+
+                <f:facet name="header">
+                    #{msgs.list}
+                </f:facet>
+
+                <h:column id="empNameCol">
+                    <f:facet name="header">#{msgs.employee}</f:facet>
+                    <h:outputText id="empName" value="#{emp.employeeFirst} #{emp.employeeLast}"/>
+                </h:column>
+
+                <h:column id="empPhoneCol">
+                    <f:facet name="header">#{msgs.phone}</f:facet>
+                    <h:outputText id="empPhone" value="#{emp.employeePhone}"/>
+                </h:column>
+
+                <h:column id="empEmailCol">
+                    <f:facet name="header">#{msgs.email}</f:facet>
+                    <h:outputText id="empEmail" value="#{emp.employeeEmail}"/>
+                </h:column>
+
+                <h:column id="empAddressCol">
+                    <f:facet name="header">#{msgs.address}</f:facet>
+                    <h:outputText id="empAddress" value="#{emp.employeeAddress}"/>
+                </h:column>               
+                
+                <f:facet name="employeePhoto">
+                    Employee Photo
+                </f:facet>
+                <h:column>
+                    <h:graphicImage  style=" max-height: 100px; max-width: 100px;" library="images"  name="#{emp.photo}"/>     
+                </h:column>
+                
+                <h:column id="actionCol">
+                    <h:commandButton id="employeeRemove" action="#{employeeController.removeEmployee(emp)}" value="#{msgs.remove}"/>
+                </h:column>
+                
+
+            </h:dataTable>
+            <p style="width: 100%;">
+                #{msgs.instruct}
+            </p>
+            <br></br>
+            <h:panelGrid columns="3">
+
+                <h:outputLabel for="employeeFirst" value="#{msgs.first}" />
+                <h:inputText id="employeeFirst" immediate="true" onchange="submit()" value="#{employeeController.employeeFirst}">
+                </h:inputText>
+                <h:message for="employeeFirst" errorStyle="color:red"/>
+
+                <h:outputLabel for="employeeLast" value="#{msgs.last}" />
+                <h:inputText id="employeeLast" value="#{employeeController.employeeLast}">
+                </h:inputText>
+                <h:message for="employeeLast" errorStyle="color:red"/>
+
+                <h:outputLabel for="employeePhone" value="#{msgs.phone}"/>
+                <h:inputText id="employeePhone" immediate="true" value="#{employeeController.employeePhone}">
+                </h:inputText>
+                <h:message for="employeePhone" errorStyle="color:red"/>
+
+                <h:outputLabel for="employeeEmail" value="#{msgs.email}"/>
+                <h:inputText id="employeeEmail" immediate="true" value="#{employeeController.employeeEmail}">
+                </h:inputText>
+                <h:message for="employeeEmail" errorStyle="color:red"/>
+
+                <h:outputLabel for="employeeAddress" value="#{msgs.address}"/>
+                <h:inputText id="employeeAddress" immediate="true" value="#{employeeController.employeeAddress}">
+                </h:inputText>
+                <h:message for="employeeAddress" errorStyle="color:red"/>
+                
+            </h:panelGrid>
+            <br/>
+            <h:commandButton id="employeeInsert" action="#{employeeController.insertEmployee()}" value="#{msgs.insert}"/>
+            <h:commandButton id="employeeRemove" action="#{employeeController.removeEmployee()}" value="#{msgs.remove}"/>
+            <h:commandButton id="employeeSort"   action="#{employeeController.sortEmployee(true)}"   value="#{msgs.sorta}"/>
+            <h:commandButton id="employeeSort2"  action="#{employeeController.sortEmployee(false)}"   value="#{msgs.sortd}"/>
+            <br/>
+            <br/>
+            <h:commandButton id="localeAR" action="#{employeeController.arabicLocale()}" value="#{msgs.Locale_AR}"/>
+            <h:commandButton id="localeDE" action="#{employeeController.germanLocale()}"  value="#{msgs.Locale_DE}"/>
+            <h:commandButton id="localeEL" action="#{employeeController.greekLocale()}"   value="#{msgs.Locale_EL}"/>
+            <h:commandButton id="localeEN" action="#{employeeController.englishLocale()}" value="#{msgs.Locale_EN}"/>
+            <h:commandButton id="localeES" action="#{employeeController.spanishLocale()}" value="#{msgs.Locale_ES}"/>
+            <h:commandButton id="localeFR" action="#{employeeController.frenchLocale()}"  value="#{msgs.Locale_FR}"/>
+            <h:commandButton id="localeRU" action="#{employeeController.russianLocale()}" value="#{msgs.Locale_RU}"/>
+            <h:commandButton id="localeZH" action="#{employeeController.chineseLocale()}" value="#{msgs.Locale_ZH}"/>
+        </h:form>
+    </h:body>
+</html>
+

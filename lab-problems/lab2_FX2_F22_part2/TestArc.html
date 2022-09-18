@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>TestArc.java</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+body {color: #a9b7c6; background-color: #2b2b2b; font-family: monospace}
+pre {color: #a9b7c6; background-color: #2b2b2b; font-family: monospace}
+table {color: #888888; background-color: #313335; font-family: monospace}
+.comment {color: #808080}
+.whitespace {color: #505050}
+.ST2 {color: #9876aa; font-family: monospace; font-style: italic}
+.ST3 {color: #ffc66d; font-family: monospace; font-style: italic}
+.number {color: #6897bb}
+.ST1 {color: #ffc66d}
+.ST0 {color: #287bde}
+.ST4 {font-family: monospace; font-style: italic}
+.literal {color: #cc7832}
+-->
+</style>
+</head>
+<body>
+<table width="100%"><tr><td align="center">C:\Users\jacob\Documents\NetBeansProjects\FX2\src\events\TestArc.java</td></tr></table>
+<pre>
+<span class="comment">/*</span>
+<span class="comment"> * Click </span><span class="ST0">nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt</span><span class="comment"> to change this license</span>
+<span class="comment"> * Click </span><span class="ST0">nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java</span><span class="comment"> to edit this template</span>
+<span class="comment"> */</span>
+<span class="literal">package</span> events;
+
+<span class="literal">import</span> javafx.application.Application;
+<span class="comment">import</span> <span class="comment">javafx</span><span class="comment">.</span><span class="comment">geometry</span><span class="comment">.</span><span class="comment">Insets</span><span class="comment">;</span>
+<span class="literal">import</span> javafx.scene.Scene;
+<span class="literal">import</span> javafx.scene.layout.Pane;
+<span class="comment">import</span> <span class="comment">javafx</span><span class="comment">.</span><span class="comment">scene</span><span class="comment">.</span><span class="comment">paint</span><span class="comment">.</span><span class="comment">Color</span><span class="comment">;</span>
+<span class="literal">import</span> javafx.scene.shape.Arc;
+<span class="literal">import</span> javafx.scene.shape.ArcType;
+<span class="comment">import</span> <span class="comment">javafx</span><span class="comment">.</span><span class="comment">scene</span><span class="comment">.</span><span class="comment">text</span><span class="comment">.</span><span class="comment">Font</span><span class="comment">;</span>
+<span class="comment">import</span> <span class="comment">javafx</span><span class="comment">.</span><span class="comment">scene</span><span class="comment">.</span><span class="comment">text</span><span class="comment">.</span><span class="comment">FontPosture</span><span class="comment">;</span>
+<span class="comment">import</span> <span class="comment">javafx</span><span class="comment">.</span><span class="comment">scene</span><span class="comment">.</span><span class="comment">text</span><span class="comment">.</span><span class="comment">FontWeight</span><span class="comment">;</span>
+<span class="comment">import</span> <span class="comment">javafx</span><span class="comment">.</span><span class="comment">scene</span><span class="comment">.</span><span class="comment">text</span><span class="comment">.</span><span class="comment">Text</span><span class="comment">;</span>
+<span class="literal">import</span> javafx.stage.Stage;
+
+<span class="literal">public</span> <span class="literal">class</span> TestArc <span class="literal">extends</span> Application {
+
+    @Override
+    <span class="literal">public</span> <span class="literal">void</span> <span class="ST1">start</span>(Stage primaryStage) {
+        Pane pane = <span class="literal">new</span> Pane();
+        Arc arc = <span class="literal">new</span> Arc();
+        arc.setCenterX(<span class="number">5</span><span class="number">0.0f</span>);
+        arc.setCenterY(<span class="number">5</span><span class="number">0.0f</span>);
+        arc.setRadiusX(<span class="number">2</span><span class="number">5.0f</span>);
+        arc.setRadiusY(<span class="number">2</span><span class="number">5.0f</span>);
+        arc.setStartAngle(<span class="number">4</span><span class="number">5.0f</span>);
+        arc.setLength(<span class="number">2</span><span class="number">70.0f</span>);
+        arc.setType(ArcType.<span class="ST2">ROUND</span>);
+        
+        pane.getChildren().add(arc);
+        Scene scene = <span class="literal">new</span> Scene(pane,<span class="number">4</span><span class="number">00</span>,<span class="number">3</span><span class="number">00</span>);
+        
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
+    }
+
+    <span class="literal">public</span> <span class="literal">static</span> <span class="literal">void</span> <span class="ST3">main</span>(String[] args) {
+        <span class="ST4">launch</span>(args);
+    }
+}
+
+</pre></body>
+</html>
