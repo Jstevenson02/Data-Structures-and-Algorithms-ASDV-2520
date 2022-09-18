@@ -8,47 +8,51 @@ package practice.javatest;
  *
  * @author jacob
  */
+class SelectionSort {
 
-// Java program for implementation of Selection Sort
-class SelectionSort
-{
-    void sort(int arr[])
-    {
-        int n = arr.length;
- 
-        // One by one move boundary of unsorted subarray
-        for (int i = 0; i < n-1; i++)
-        {
-            // Find the minimum element in unsorted array
-            int min_idx = i;
-            for (int j = i+1; j < n; j++)
-                if (arr[j] < arr[min_idx])
-                    min_idx = j;
- 
-            // Swap the found minimum element with the first
-            // element
-            int temp = arr[min_idx];
-            arr[min_idx] = arr[i];
-            arr[i] = temp;
+    static int minIndex(int a[], int i, int j) {
+        if (i == j) {
+            return i;
         }
+
+        int k = minIndex(a, i + 1, j);
+
+        return (a[i] < a[k]) ? i : k;
     }
- 
-    // Prints the array
-    void printArray(int arr[])
-    {
-        int n = arr.length;
-        for (int i=0; i<n; ++i)
-            System.out.print(arr[i]+" ");
-        System.out.println();
+
+    // Recursive selection sort. n is size of a[] and index
+    // is index of starting element.
+    static void selectionSortR(int a[], int n, int index) {
+
+        // Return when starting and size are same
+        if (index == n) {
+            return;
+        }
+
+        // calling minimum index function for minimum index
+        int k = minIndex(a, index, n - 1);
+
+        // Swapping when index nd minimum index are not same
+        if (k != index) {
+            // swap
+            int temp = a[k];
+            a[k] = a[index];
+            a[index] = temp;
+        }
+        // Recursively calling selection sort function
+        selectionSortR(a, n, index + 1);
     }
- 
-    // Driver code to test above
-    public static void main(String args[])
-    {
-        SelectionSort ob = new SelectionSort();
-        int arr[] = {64,25,12,22,11};
-        ob.sort(arr);
-        System.out.println("Sorted array");
-        ob.printArray(arr);
+
+    // Driver method
+    public static void main(String args[]) {
+        int arr[] = {8, 2, 1, 1, 7, 4, -1, 50, 49};
+
+        // Calling function
+        selectionSortR(arr, arr.length, 0);
+
+        //printing sorted array
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
     }
 }
