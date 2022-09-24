@@ -92,7 +92,7 @@ public class Maze extends Application {
     }
 
     public boolean findPath(int row, int col) {
-        board[row][col].visit();
+        board[row][col].visit(false);
 
         if ((col == 7) && (row == 7)) {
             board[row][col].selectCell();
@@ -100,54 +100,54 @@ public class Maze extends Application {
         }
 
         if ((row > 0) && !board[row - 1][col].marked()
-                && !board[row - 1][col].blocked() && !board[row - 1][col].visited()) {
-            block(row, col);
+                && !board[row - 1][col].blocked(false) && !board[row - 1][col].visited(false)) {
+            block(row, col, false);
 
             if (findPath(row - 1, col)) {
                 board[row][col].selectCell();
                 return true;
             }
 
-            unblock(row, col);
+            unblock(row, col, false);
         }
 
         if ((row < 7) && !board[row + 1][col].marked()
-                && !board[row + 1][col].blocked() && !board[row + 1][col].visited()) {
-            block(row, col);
+                && !board[row + 1][col].blocked(false) && !board[row + 1][col].visited(false)) {
+            block(row, col, false);
 
             if (findPath(row + 1, col)) {
                 board[row][col].selectCell();
                 return true;
             }
-            unblock(row, col);
+            unblock(row, col, false);
         }
 
         if ((col > 0) && !board[row][col - 1].marked()
-                && !board[row][col - 1].blocked() && !board[row][col - 1].visited()) {
-            block(row, col);
+                && !board[row][col - 1].blocked(false) && !board[row][col - 1].visited(false)) {
+            block(row, col, false);
             if (findPath(row, col - 1)) {
                 board[row][col].selectCell();
                 return true;
             }
 
-            unblock(row, col);
+            unblock(row, col, false);
         }
 
         if ((col < 7) && !board[row][col + 1].marked()
-                && !board[row][col + 1].blocked() && !board[row][col + 1].visited()) {
-            block(row, col);
+                && !board[row][col + 1].blocked(false) && !board[row][col + 1].visited(false)) {
+            block(row, col, false);
             if (findPath(row, col + 1)) {
                 board[row][col].selectCell();
                 return true;
             }
-            unblock(row, col);
+            unblock(row, col, false);
         }
         return false;
     }
 
     public boolean findPath2(int row, int col) {
 
-        board[row][col].visit();
+        board[row][col].visit(true);
 
         if ((col == 0) && (row == 7)) {
             board[row][col].selectCell(true);
@@ -155,80 +155,80 @@ public class Maze extends Application {
         }
 
         if ((row > 0) && !board[row - 1][col].marked()
-                && !board[row - 1][col].blocked() && !board[row - 1][col].visited()) {
-            block(row, col);
+                && !board[row - 1][col].blocked(true) && !board[row - 1][col].visited(true)) {
+            block(row, col, true);
 
             if (findPath2(row - 1, col)) {
                 board[row][col].selectCell(true);
                 return true;
             }
 
-            unblock(row, col);
+            unblock(row, col, true);
         }
 
         if ((row < 7) && !board[row + 1][col].marked()
-                && !board[row + 1][col].blocked() && !board[row + 1][col].visited()) {
-            block(row, col);
+                && !board[row + 1][col].blocked(true) && !board[row + 1][col].visited(true)) {
+            block(row, col, true);
 
             if (findPath2(row + 1, col)) {
                 board[row][col].selectCell(true);
                 return true;
             }
-            unblock(row, col);
+            unblock(row, col, true);
         }
 
         if ((col > 0) && !board[row][col - 1].marked()
-                && !board[row][col - 1].blocked() && !board[row][col - 1].visited()) {
-            block(row, col);
+                && !board[row][col - 1].blocked(true) && !board[row][col - 1].visited(true)) {
+            block(row, col, true);
             if (findPath2(row, col - 1)) {
                 board[row][col].selectCell(true);
                 return true;
             }
 
-            unblock(row, col);
+            unblock(row, col, true);
         }
 
         if ((col < 7) && !board[row][col + 1].marked()
-                && !board[row][col + 1].blocked() && !board[row][col + 1].visited()) {
-            block(row, col);
+                && !board[row][col + 1].blocked(true) && !board[row][col + 1].visited(true)) {
+            block(row, col, true);
             if (findPath2(row, col + 1)) {
                 board[row][col].selectCell(true);
                 return true;
             }
-            unblock(row, col);
+            unblock(row, col, true);
         }
         return false;
     }
 
     // Temporary block the neighbor to prevent neighboring path
-    public void block(int row, int col) {
+    public void block(int row, int col, boolean colorGreen) {
         if (row > 0) {
-            board[row - 1][col].block();
+            board[row - 1][col].block(colorGreen);
         }
         if (row < 7) {
-            board[row + 1][col].block();
+            board[row + 1][col].block(colorGreen);
         }
         if (col > 0) {
-            board[row][col - 1].block();
+            board[row][col - 1].block(colorGreen);
         }
         if (col < 7) {
-            board[row][col + 1].block();
+            board[row][col + 1].block(colorGreen);
         }
     }
 
     // Remove the temporary block
-    public void unblock(int row, int col) {
+    public void unblock(int row, int col, boolean colorGreen) {
         if (row > 0) {
-            board[row - 1][col].unblock();
+            board[row - 1][col].unblock(colorGreen);
         }
         if (row < 7) {
-            board[row + 1][col].unblock();
+            board[row + 1][col].unblock(colorGreen);
         }
         if (col > 0) {
-            board[row][col - 1].unblock();
+            board[row][col - 1].unblock(colorGreen);
         }
         if (col < 7) {
-            board[row][col + 1].unblock();
+            board[row][col + 1].unblock(colorGreen);
         }
     }
 
@@ -250,6 +250,12 @@ public class Maze extends Application {
         private boolean marked = false;
         private boolean visited = false;
         private boolean blocked = false;
+
+        private boolean visited2 = false;
+        private boolean blocked2 = false;
+
+        private boolean filledRed = false;
+        private boolean filledGreen = false;
 
         double width = paneWidth / 8;
         double height = paneHeight / 8;
@@ -287,31 +293,57 @@ public class Maze extends Application {
             return marked;
         }
 
-        public void visit() {
-            visited = true;
+        public void visit(boolean colorGreen) {
+            if (colorGreen) {
+                visited2 = true;
+            } else {
+                visited = true;
+            }
         }
 
-        public boolean visited() {
-            return visited;
+        public boolean visited(boolean colorGreen) {
+            if (colorGreen) {
+                return visited2;
+            } else {
+                return visited;
+            }
         }
 
-        public boolean blocked() {
-            return blocked;
+        public boolean blocked(boolean colorGreen) {
+            if (colorGreen) {
+                return blocked2;
+            } else {
+                return blocked;
+            }
         }
 
-        public void block() {
-            blocked = true;
+        public void block(boolean colorGreen) {
+            if (colorGreen) {
+                blocked2 = true;
+            } else {
+                blocked = true;
+            }
         }
 
-        public void unblock() {
-            blocked = false;
+        public void unblock(boolean colorGreen) {
+            if (colorGreen) {
+                blocked2 = false;
+            } else {
+                blocked = false;
+            }
         }
 
         public void selectCell(boolean colorGreen) {
             if (colorGreen) {
                 rectangle.setFill(Color.GREEN);
+                filledGreen = true;
             } else {
                 rectangle.setFill(Color.RED);
+                filledRed = true;
+            }
+
+            if (filledRed && filledGreen) {
+                rectangle.setFill(Color.YELLOW);
             }
         }
 
@@ -323,6 +355,10 @@ public class Maze extends Application {
             rectangle.setFill(Color.WHITE);
             blocked = false;
             visited = false;
+            blocked2 = false;
+            visited2 = false;
+            filledRed = false;
+            filledGreen = false;
         }
     }
 }
