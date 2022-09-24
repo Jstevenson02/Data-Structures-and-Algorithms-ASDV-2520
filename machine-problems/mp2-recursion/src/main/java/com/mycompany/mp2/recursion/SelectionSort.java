@@ -1,4 +1,4 @@
- package com.mycompany.mp2.recursion;
+package com.mycompany.mp2.recursion;
 
 /**
  *
@@ -6,32 +6,31 @@
  */
 class SelectionSort {
 
+    static void selectionSortOneRecursiveFunction(int a[], int index, int n) {
 
-        int temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
-        
-    public static void selectionSort(int[] arr, int i, int n)
-    {
-        int min = i;
-        for (int j = i + 1; j < n; j++)
-        {
-            if (arr[j] < arr[min]) {
-                min = j;    
+        // Find Min Index
+        int min = index;
+        for (int j = index + 1; j < n; j++) {
+            if (a[j] < a[min]) {
+                min = j;
             }
         }
- 
-        swap(arr, min, i);
- 
-        if (i + 1 < n) {
-            selectionSort(arr, i + 1, n);
+
+        // Swap with Next Element
+        int temp = a[min];
+        a[min] = a[index];
+        a[index] = temp;
+
+        // Check If we have more work to do
+        if (index + 1 < n) {
+            selectionSortOneRecursiveFunction(a, index + 1, n);
         }
     }
- 
+
     public static void main(String args[]) {
         int arr[] = {8, 2, 1, 1, 7, 4, -1, 50, 49};
 
-        selectionSortR(arr, arr.length, 0);
+        selectionSortOneRecursiveFunction(arr, 0, arr.length);
 
         for (int i = 0; i < arr.length; i++) {
             System.out.print(arr[i] + " ");

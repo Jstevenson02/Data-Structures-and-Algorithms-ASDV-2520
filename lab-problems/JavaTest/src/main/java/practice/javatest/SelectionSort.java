@@ -37,7 +37,7 @@ class SelectionSort {
     }
 
     public static void main(String args[]) {
-        int arr[] = {8, 2, 1, 1, 7, 4, -1, 50, 49};
+        int arr[] = {10, 1, 20, 3};
 
         selectionSortR(arr, arr.length, 0);
 

@@ -24,11 +24,13 @@ public class Maze extends Application {
 
     private Cell[][] board = new Cell[8][8];
     private Button btFindPath = new Button("Find Path Top Left to Bottom Right");
+    private Button btFindPath2 = new Button("Find Path Top Right to Bottom Left");
     private Button btClearPath = new Button("Clear Path");
     private Label lblStatus = new Label();
 
     @Override // Override the start method in the Application class
     public void start(Stage primaryStage) {
+
         GridPane gridPane = new GridPane();
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -38,7 +40,7 @@ public class Maze extends Application {
 
         HBox hBox = new HBox(5);
         hBox.setAlignment(Pos.CENTER);
-        hBox.getChildren().addAll(btFindPath, btClearPath);
+        hBox.getChildren().addAll(btFindPath, btFindPath2, btClearPath);
 
         BorderPane pane = new BorderPane();
         pane.setTop(lblStatus);
@@ -49,10 +51,11 @@ public class Maze extends Application {
         // Create a scene and place it in the stage
         Scene scene = new Scene(pane, paneWidth, paneHeight + 60);
         primaryStage.setTitle("Maze"); // Set the stage title
-//        primaryStage.setScene(scene); // Place the scene in the stage
-//        primaryStage.show(); // Display the stage
+        primaryStage.setScene(scene); // Place the scene in the stage
+        primaryStage.show(); // Display the stage
 
         btFindPath.setOnAction(e -> findPath());
+        btFindPath2.setOnAction(e -> findPath2());
         btClearPath.setOnAction(e -> clearPath());
         showSampleMessage();
 
@@ -74,6 +77,14 @@ public class Maze extends Application {
 
     public void findPath() {
         if (findPath(0, 0)) {
+            lblStatus.setText("path found");
+        } else {
+            lblStatus.setText("No path exists");
+        }
+    }
+
+    public void findPath2() {
+        if (findPath2(0, 7)) {
             lblStatus.setText("path found");
         } else {
             lblStatus.setText("No path exists");
@@ -127,6 +138,61 @@ public class Maze extends Application {
             block(row, col);
             if (findPath(row, col + 1)) {
                 board[row][col].selectCell();
+                return true;
+            }
+            unblock(row, col);
+        }
+        return false;
+    }
+
+    public boolean findPath2(int row, int col) {
+
+        board[row][col].visit();
+
+        if ((col == 0) && (row == 7)) {
+            board[row][col].selectCell(true);
+            return true;
+        }
+
+        if ((row > 0) && !board[row - 1][col].marked()
+                && !board[row - 1][col].blocked() && !board[row - 1][col].visited()) {
+            block(row, col);
+
+            if (findPath2(row - 1, col)) {
+                board[row][col].selectCell(true);
+                return true;
+            }
+
+            unblock(row, col);
+        }
+
+        if ((row < 7) && !board[row + 1][col].marked()
+                && !board[row + 1][col].blocked() && !board[row + 1][col].visited()) {
+            block(row, col);
+
+            if (findPath2(row + 1, col)) {
+                board[row][col].selectCell(true);
+                return true;
+            }
+            unblock(row, col);
+        }
+
+        if ((col > 0) && !board[row][col - 1].marked()
+                && !board[row][col - 1].blocked() && !board[row][col - 1].visited()) {
+            block(row, col);
+            if (findPath2(row, col - 1)) {
+                board[row][col].selectCell(true);
+                return true;
+            }
+
+            unblock(row, col);
+        }
+
+        if ((col < 7) && !board[row][col + 1].marked()
+                && !board[row][col + 1].blocked() && !board[row][col + 1].visited()) {
+            block(row, col);
+            if (findPath2(row, col + 1)) {
+                board[row][col].selectCell(true);
                 return true;
             }
             unblock(row, col);
@@ -207,25 +273,32 @@ public class Maze extends Application {
                 }
             });
         }
+
         public void mark() {
             this.getChildren().addAll(line1, line2);
         }
+
         public void unmark() {
             this.getChildren().remove(line1);
             this.getChildren().remove(line2);
         }
+
         public boolean marked() {
             return marked;
         }
+
         public void visit() {
             visited = true;
         }
+
         public boolean visited() {
             return visited;
         }
+
         public boolean blocked() {
             return blocked;
         }
+
         public void block() {
             blocked = true;
         }
@@ -233,9 +306,19 @@ public class Maze extends Application {
         public void unblock() {
             blocked = false;
         }
-        public void selectCell() {
-            rectangle.setFill(Color.RED);
+
+        public void selectCell(boolean colorGreen) {
+            if (colorGreen) {
+                rectangle.setFill(Color.GREEN);
+            } else {
+                rectangle.setFill(Color.RED);
+            }
         }
+
+        public void selectCell() {
+            selectCell(false);
+        }
+
         public void deselectCell() {
             rectangle.setFill(Color.WHITE);
             blocked = false;
