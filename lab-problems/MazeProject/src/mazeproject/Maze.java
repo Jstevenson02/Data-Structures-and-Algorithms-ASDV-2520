@@ -23,8 +23,8 @@ public class Maze extends Application {
     double paneHeight = 440;
 
     private Cell[][] board = new Cell[8][8];
-    private Button btFindPath = new Button("Find Path Top Left to Bottom Right");
-    private Button btFindPath2 = new Button("Find Path Top Right to Bottom Left");
+    private Button btFindPath = new Button("RED Path");
+    private Button btFindPath2 = new Button("GREEN Path");
     private Button btClearPath = new Button("Clear Path");
     private Label lblStatus = new Label();
 
@@ -77,17 +77,17 @@ public class Maze extends Application {
 
     public void findPath() {
         if (findPath(0, 0)) {
-            lblStatus.setText("path found");
+            lblStatus.setText("Path Found!");
         } else {
-            lblStatus.setText("No path exists");
+            lblStatus.setText("Entrance / Exit squares are blocked!");
         }
     }
 
     public void findPath2() {
         if (findPath2(0, 7)) {
-            lblStatus.setText("path found");
+            lblStatus.setText("Path Found!");
         } else {
-            lblStatus.setText("No path exists");
+            lblStatus.setText("Entrance / Exit squares are blocked!");
         }
     }
 
