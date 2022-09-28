@@ -4,10 +4,17 @@
  */
 package practice.genericsrules;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author jacob
  */
 public class GenericRule1 {
-    
+    public static void f1(ArrayList<Number> list) {}
+    public static void main(String[] args) 
+    {
+        // no inhertence in the diamond 
+        f1(new ArrayList<Integer>());
+    }
 }
