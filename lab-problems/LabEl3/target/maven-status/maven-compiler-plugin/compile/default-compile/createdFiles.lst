@@ -1,0 +1,6 @@
+edu\slcc\asdv\beans\Person$Education.class
+edu\slcc\asdv\beans\Person.class
+edu\slcc\asdv\pojo\Birth.class
+edu\slcc\asdv\beans\Person$Hobbies.class
+edu\slcc\asdv\pojo\Twin.class
+edu\slcc\asdv\pojo\Gender.class
