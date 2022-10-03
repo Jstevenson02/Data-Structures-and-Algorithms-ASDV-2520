@@ -44,7 +44,9 @@ public class TestIterator<E> {
 
             @Override
             public void forEachRemaining(Consumer<? super E> action) {
-                throw new UnsupportedOperationException("Not supported yet.");
+                while (hasNext()) {
+                    action.accept(next());
+                }
             }
         };
         return null;
@@ -68,11 +70,18 @@ public class TestIterator<E> {
         while (it1.hasNext()) {
             System.out.println(it1.next() + "");
             System.out.println("");
+
+            it1.forEachRemaining(new Consumer<Integer>() {
+
+                @Override
+                public void accept(Integer t) {
+                    System.out.println(t * 200 + " ");
+                }
+            });
         }
         while (it2.hasNext()) {
             System.out.println(it2.next() + "");
             System.out.println("");
         }
-
     }
 }
