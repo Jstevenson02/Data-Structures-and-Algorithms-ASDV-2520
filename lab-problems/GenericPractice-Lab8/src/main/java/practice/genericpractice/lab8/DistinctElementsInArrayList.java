@@ -15,18 +15,32 @@ import java.util.List;
 public class DistinctElementsInArrayList {
 
     public static <E> ArrayList<E> removeDuplicates(ArrayList<E> list) {
-        return null;
+
+        for (int i = 0; i < list.size() - 1; i++) {
+            {
+                E toBeremoved = list.get(i);
+
+                for (int j = i + 1; j < list.size(); ++j) {
+                    if (list.get(j).equals(list.get(i))) {
+                        list.remove(j);
+                        break;
+                    }
+
+                }
+
+            }
+        }
+        return list;
     }
 
     public static void main(String[] args) {
-        ArrayList<Integer> ar1 = (ArrayList<Integer>) Arrays.asList(new Integer[]{1, 2, 3, 4, 4, 5, 5});
-        ArrayList<String> ar2 = (ArrayList<String>) Arrays.asList(new String[]{"a", "b", "b", "c", "c"});
-        ArrayList<A> ar3 = (ArrayList<A>) Arrays.asList(new A[]{new A(1), new A(2), new A(2)});
+        ArrayList<Integer> ar1 = new ArrayList<>(Arrays.asList(new Integer[]{1, 2, 3, 4, 4, 5, 5}));
+        ArrayList<String> ar2 = new ArrayList<>(Arrays.asList(new String[]{"a", "b", "b", "c", "c"}));
+        ArrayList<B> ar3 = new ArrayList<B>(Arrays.asList(new B[]{new B(1), new B(2), new B(2)}));
 
         System.out.println(removeDuplicates(ar1));
         System.out.println(removeDuplicates(ar2));
         System.out.println(removeDuplicates(ar3));
-
     }
 }
 
@@ -36,6 +50,21 @@ class A {
 
     public A(int x) {
         this.x = x;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final A other = (A) obj;
+        return this.x == other.x;
     }
 
     @Override
