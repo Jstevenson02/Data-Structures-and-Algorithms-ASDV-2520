@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author jacob
  */
-public class GenericsRule6 {
+public class GenericRule6 {
 
     public static void f6(List<? extends A> list) {
         System.out.println(list.size());

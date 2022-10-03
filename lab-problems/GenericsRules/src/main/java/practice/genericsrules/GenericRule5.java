@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author jacob
  */
-public class GenericsRule5 {
+public class GenericRule5 {
     
     public static void main(String[] args) {
         List<?> list1 = new ArrayList<Integer>();
