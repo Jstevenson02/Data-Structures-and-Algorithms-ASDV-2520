@@ -5,9 +5,6 @@
 package practice.genericpractice.lab8;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import static practice.genericpractice.lab8.GenericBinarySearch.binarySearch;
 
 /**
  *
