@@ -78,7 +78,23 @@ public class ArrayListASDV<E>
      */
     @Override
     public boolean add(E e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (e == null) {
+            throw new NullPointerException();
+        }
+        list[index++] = e;
+        if (index >= list.length * 0.75) {
+            doubleSizeOfList();
+        }
+        return true;
+    }
+
+    /*
+    Double the size of the current list and copy to it the old 
+    list, return the new array.
+     */
+    private E[] doubleSizeOfList() {
+        list = this.toArray((E[]) new Object[list.length + list.length]);
+        return toArray(list);
     }
 
     /**
@@ -120,15 +136,33 @@ public class ArrayListASDV<E>
      * such that (o==null ? e==null : o.equals(e)).
      *
      * @param o - element whose presence in this list is to be tested
-     *
      * @return true if this list contains the specified element
-     *
      */
     @Override
     public boolean contains(Object o) {
 
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // Markous answer
+        for (int i = 0; i < this.index; ++i) {
+            if (this.list[i].equals(o)) {
+                return true;
+            }
+        }
+        return false;
 
+        // equals insert code 
+        /*
+        if (this == o) {
+            return true;
+        }
+        if (o == null) {
+            return false;
+        }
+        if (getClass() != o.getClass()) {
+            return false;
+        }
+        final ArrayListASDV<?> other = (ArrayListASDV<?>) o;
+        return Arrays.deepEquals(this.list, other.list);
+         */
     }
 
     /**
@@ -184,13 +218,12 @@ public class ArrayListASDV<E>
      * @param index of the element to return
      * @return the element at the specified position in this list
      * @throws IndexOutOfBoundsException - if the index is out of range (index
-     * GE 0 || index GE size())
+     * <= 0 || index GE size())
      */
     @Override
-    public E get(int index
-    ) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public E get(int index) {
 
+        throw new IndexOutOfBoundsException();
     }
 
     /**
@@ -470,7 +503,7 @@ public class ArrayListASDV<E>
 
             @Override
             public void set(E e) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                throw new IndexOutOfBoundsException();
             }
 
             @Override
@@ -569,9 +602,12 @@ public class ArrayListASDV<E>
 
     }
 
-    public static void main(String[] args)
-            throws ClassNotFoundException, InterruptedException {
+    public static void main(String[] args) throws ClassNotFoundException, InterruptedException {
+
         ArrayList<Integer> aaa = new ArrayList();
+
+        System.out.println("------------------------------");
+        System.out.println("Test Work");
 
         ArrayListASDV<Integer> list1 = new ArrayListASDV();
         ArrayListASDV<String> list2 = new ArrayListASDV(4);
@@ -614,6 +650,8 @@ public class ArrayListASDV<E>
         System.out.println(list2);
         System.out.println("contains A(-1): " + list3.contains(new A1(-1)));
         System.out.println("contains A(-3): " + list3.contains(new A1(-3)));
+
+        /*
 
         System.out.println("------------------------------ ");
         System.out.print("test toArray(): ");
@@ -753,6 +791,8 @@ public class ArrayListASDV<E>
         li3.add(30);
         li3.add(40);
         System.out.println(li3);
+
+        
         ListIterator<Integer> li = li3.listIterator(2);
         while (li.hasNext()) {
             System.out.print("\tnext index: " + li.nextIndex());
@@ -845,6 +885,7 @@ public class ArrayListASDV<E>
         });
         li3.addAll(2, ar33);
         System.out.println(li3);
+         */
     }
 
 }

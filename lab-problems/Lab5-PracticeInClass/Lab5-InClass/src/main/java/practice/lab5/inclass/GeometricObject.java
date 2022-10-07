@@ -79,8 +79,10 @@ public abstract class GeometricObject {
         Comparator<GeometricObject> c = new Comparator<GeometricObject>() {
             @Override
             public int compare(GeometricObject o1, GeometricObject o2) {
-                 return o1.getArea() - o2.getArea() > 0
-                ? 1 : o1.getArea() == o2.getArea() ? 0 : -1;
+                 return 
+                         o1.getArea() - o2.getArea() > 0 ? 
+                         1 : o1.getArea() == o2.getArea() ? 
+                         0 : -1;
             }
         };
         return c;
