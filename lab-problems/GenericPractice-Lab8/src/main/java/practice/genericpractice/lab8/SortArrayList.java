@@ -10,6 +10,7 @@ import java.util.ArrayList;
  *
  * @author jacob
  */
+
 public class SortArrayList {
 
     public static <E extends Comparable<E>> void sort(ArrayList<E> list) {

@@ -1,45 +1,42 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package practice.genericpractice.lab8;
 
 import java.util.Iterator;
 import java.util.function.Consumer;
 
-/**
- *
- * @author jacob
- */
 public class TestIterator<E> {
 
-    private E[] array;
+    private E[] ar;
     private int size;
 
     public TestIterator() {
-        array = (E[]) new Object[3];
+        ar = (E[]) new Object[3];
     }
 
     public void add(E e) {
-        array[array.length - 1] = e;
+        ar[size++] = e;
     }
 
     public Iterator<E> iterator() {
-        Iterator<E> it = new Iterator<E>() {
-
+        Iterator<E> ti = new Iterator<E>() {
             int index = 0;
 
             @Override
             public boolean hasNext() {
-                if (index < array.length) {
+                if (index < ar.length) {
                     return true;
+                } else {
+                    return false;
                 }
-                return false;
             }
 
             @Override
             public E next() {
-                return array[index++];
+                return ar[index++];
+            }
+
+            @Override
+            public void remove() {
+                throw new UnsupportedOperationException("Not supported yet.");
             }
 
             @Override
@@ -49,39 +46,55 @@ public class TestIterator<E> {
                 }
             }
         };
-        return null;
+        return ti;
     }
 
     public static void main(String[] args) {
-        TestIterator<Integer> te1 = new TestIterator();
-        TestIterator<String> te2 = new TestIterator();
+        TestIterator<Integer> testIteration1 = new TestIterator();
+        TestIterator<String> testIteration2 = new TestIterator();
 
-        te1.add(1);
-        te1.add(2);
-        te1.add(3);
+        testIteration1.add(1);
+        testIteration1.add(2);
+        testIteration1.add(3);
+        testIteration2.add("one");
+        testIteration2.add("two");
+        testIteration2.add("three");
 
-        te2.add("oen");
-        te2.add("two");
-        te2.add("three");
-
-        Iterator<Integer> it1 = te1.iterator();
-        Iterator<String> it2 = te2.iterator();
+        Iterator<Integer> it1 = testIteration1.iterator();
+        Iterator<String> it2 = testIteration2.iterator();
 
         while (it1.hasNext()) {
-            System.out.println(it1.next() + "");
-            System.out.println("");
+            System.out.print(it1.next() + " ");
+        }
+        System.out.println("");
+
+        while (it2.hasNext()) {
+            System.out.print(it2.next() + " ");
 
             it1.forEachRemaining(new Consumer<Integer>() {
-
                 @Override
                 public void accept(Integer t) {
-                    System.out.println(t * 200 + " ");
+                    System.out.println(t + 200 + " ");
                 }
             });
         }
-        while (it2.hasNext()) {
-            System.out.println(it2.next() + "");
-            System.out.println("");
-        }
+        System.out.println("");
+
+        it1.forEachRemaining(
+                new Consumer<Integer>() {
+            @Override
+            public void accept(Integer t) {
+                System.out.println(t * 2 + " ");
+            }
+
+            @Override
+            public Consumer<Integer> andThen(Consumer<? super Integer> after) {
+                return Consumer.super.andThen(after);
+            }
+        });
+
     }
+}
+
+class C {
 }

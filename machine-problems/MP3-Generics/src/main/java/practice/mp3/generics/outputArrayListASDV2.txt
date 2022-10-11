@@ -63,7 +63,7 @@ test indexOf()
 -1
 
 ---------------------------------------
-test lastndexOf()
+test lastindexOf()
 0
 10
 -1
