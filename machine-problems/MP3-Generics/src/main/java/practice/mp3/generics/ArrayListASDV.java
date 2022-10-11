@@ -432,7 +432,7 @@ public class ArrayListASDV<E>
 
             @Override
             public boolean hasNext() {
-                return currentIndex <  ArrayListASDV.this.list.length && ArrayListASDV.this.list[currentIndex] != null;
+                return currentIndex < ArrayListASDV.this.list.length && ArrayListASDV.this.list[currentIndex] != null;
             }
 
             @Override
@@ -588,16 +588,28 @@ public class ArrayListASDV<E>
      * are incompatible with this collection
      */
     @Override
-    public boolean containsAll(Collection<?> c
-    ) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-
+    public boolean containsAll(Collection<?> c) {
+        boolean foundAll = true;
+        for ( Object element : c ) {
+            try {
+                foundAll &= this.contains(element );
+            } catch ( ClassCastException e ) {
+                foundAll = false;
+            }
+        }
+        return foundAll;
     }
 
     @Override
     public boolean addAll(Collection<? extends E> c
     ) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean modified = false;
+        for (E e : c) {
+            if (add(e)) {
+                modified = true;
+            }
+        }
+        return modified;
 
     }
 
@@ -826,7 +838,6 @@ public class ArrayListASDV<E>
             System.out.print(it.next() + " ");
         }
         System.out.println("");
-        /*
 
         System.out.println("\n---------------------------------------");
         System.out.println("test ListIterator1()");
@@ -855,11 +866,9 @@ public class ArrayListASDV<E>
         System.out.println("\n---------------------------------------");
         System.out.println("test forEachRemaining()");
         System.out.println(li.next());
-        li.forEachRemaining(new Consumer<Integer>()
-        {
+        li.forEachRemaining(new Consumer<Integer>() {
             @Override
-            public void accept(Integer t)
-            {
+            public void accept(Integer t) {
                 System.out.print(t + 1 + " ");
             }
         });
@@ -867,16 +876,15 @@ public class ArrayListASDV<E>
         System.out.println("\n---------------------------------------");
         System.out.println("test containsAll(Collection)");
 
-        List<Integer> ar33 = Arrays.asList(new Integer[]
-          {
+        List<Integer> ar33 = Arrays.asList(new Integer[]{
             10, 20
-          });
+        });
         System.out.println(li3.containsAll(ar33));
-        ar33 = Arrays.asList(new Integer[]
-          {
+        ar33 = Arrays.asList(new Integer[]{
             10, -1
-          });
+        });
         System.out.println(li3.containsAll(ar33));
+        /*
 
         System.out.println("\n---------------------------------------");
         System.out.println("test removeAll(Collection)");
