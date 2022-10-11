@@ -590,10 +590,10 @@ public class ArrayListASDV<E>
     @Override
     public boolean containsAll(Collection<?> c) {
         boolean foundAll = true;
-        for ( Object element : c ) {
+        for (Object element : c) {
             try {
-                foundAll &= this.contains(element );
-            } catch ( ClassCastException e ) {
+                foundAll &= this.contains(element);
+            } catch (ClassCastException e) {
                 foundAll = false;
             }
         }
@@ -616,7 +616,13 @@ public class ArrayListASDV<E>
     @Override
     public boolean addAll(int index, Collection<  ? extends E> c
     ) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean modified = false;
+        for (E e : c) {
+            if (add(e)) {
+                modified = true;
+            }
+        }
+        return modified;
 
     }
 
@@ -641,8 +647,14 @@ public class ArrayListASDV<E>
     @Override
     public boolean removeAll(Collection<?> c
     ) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-
+        int itr = 0;
+        for (int i = 0; i < ArrayListASDV.this.index; i++) {
+            if (c.contains(ArrayListASDV.this.list[i])) {
+                remove(ArrayListASDV.this.list[i]);
+                itr++;
+            }
+        }
+        return itr > 0;
     }
 
     /**
@@ -659,8 +671,14 @@ public class ArrayListASDV<E>
     @Override
     public boolean retainAll(Collection<?> c
     ) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-
+        int itr = 0;
+        for (int i = 0; i < ArrayListASDV.this.index; i++) {
+            if (!c.contains(ArrayListASDV.this.list[i])) {
+                remove(ArrayListASDV.this.list[i]);
+                itr++;
+            }
+        }
+        return itr > 0;
     }
 
     public static void main(String[] args) throws ClassNotFoundException, InterruptedException {
@@ -884,7 +902,6 @@ public class ArrayListASDV<E>
             10, -1
         });
         System.out.println(li3.containsAll(ar33));
-        /*
 
         System.out.println("\n---------------------------------------");
         System.out.println("test removeAll(Collection)");
@@ -893,66 +910,54 @@ public class ArrayListASDV<E>
         li3.add(11);
         li3.add(10);
         System.out.println(li3);
-        ar33 = Arrays.asList(new Integer[]
-          {
+        ar33 = Arrays.asList(new Integer[]{
             10
-          });
+        });
         System.out.println(li3.removeAll(ar33));
         System.out.println(li3);
-        List<Object> oar = Arrays.asList(new Object[]
-          {
+        List<Object> oar = Arrays.asList(new Object[]{
             3.3, 40, "abc"
-          });
-        try
-          {
+        });
+        try {
             li3.removeAll(oar);
-          }
-        catch (ClassCastException e)
-          {
+        } catch (ClassCastException e) {
             Thread.sleep(100);
             System.err.println(e);
-          }
+        }
         System.out.println(li3);
-        List<A1> sar = Arrays.asList(new A1[]
-          {
+        List<A1> sar = Arrays.asList(new A1[]{
             new A1(999)
-          });
-        try
-          {
+        });
+        try {
             li3.removeAll(sar);
-          }
-        catch (ClassCastException e)
-          {
+        } catch (ClassCastException e) {
             Thread.sleep(100);
             System.err.println(e);
-          }
+        }
         System.out.println(li3);
 
         System.out.println("\n---------------------------------------");
         System.out.println("test retainAll(Collection)");
-        ar33 = Arrays.asList(new Integer[]
-          {
+        ar33 = Arrays.asList(new Integer[]{
             30
-          });
+        });
         li3.retainAll(ar33);
         System.out.println(li3);
         System.out.println("\n---------------------------------------");
         System.out.println("test addAll(Collection)");
-        ar33 = Arrays.asList(new Integer[]
-          {
+        ar33 = Arrays.asList(new Integer[]{
             1, 2, 3, 4
-          });
+        });
         li3.addAll(ar33);
         System.out.println(li3);
         System.out.println("\n---------------------------------------");
         System.out.println("test addAll(index, Collection)");
-        ar33 = Arrays.asList(new Integer[]
-          {
+        ar33 = Arrays.asList(new Integer[]{
             100, 200, 300
-          });
+        });
         li3.addAll(2, ar33);
         System.out.println(li3);
-         */
+
     }
 
 }
