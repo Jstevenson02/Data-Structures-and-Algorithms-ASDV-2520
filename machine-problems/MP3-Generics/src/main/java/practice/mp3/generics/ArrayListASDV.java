@@ -1,7 +1,6 @@
 package practice.mp3.generics;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
@@ -10,9 +9,6 @@ import java.util.ListIterator;
 import java.util.NoSuchElementException;
 import java.util.function.Consumer;
 
-// Methods to create
-// add, contains, toArray, clear, get, set, add@index, remove@index, 
-// indexOf, lastIndexOf,  
 /**
  *
  * @author Jacob
@@ -50,6 +46,17 @@ public class ArrayListASDV<E>
     }
 
     /**
+     * Double the size of the current list and copies to it the old list
+     *
+     * @return the new array.
+     */
+    private E[] doubleSizeOfList() {
+        list = this.toArray((E[]) new Object[list.length + list.length]);
+        return this.list;
+
+    }
+
+    /**
      * Constructs a list containing the elements of the specified collection, in
      * the order they are returned by the collection's iterator.
      *
@@ -68,6 +75,7 @@ public class ArrayListASDV<E>
      * specified element.
      *
      * @param e - element whose presence in this collection is to be ensured
+     *
      * @return true if this collection changed as a result of the call
      * @throws ClassCastException - if the class of the specified element
      * prevents it from being added to this collection
@@ -81,20 +89,12 @@ public class ArrayListASDV<E>
         if (e == null) {
             throw new NullPointerException();
         }
+
         list[index++] = e;
         if (index >= list.length * 0.75) {
             doubleSizeOfList();
         }
         return true;
-    }
-
-    /*
-    Double the size of the current list and copy to it the old 
-    list, return the new array.
-     */
-    private E[] doubleSizeOfList() {
-        list = this.toArray((E[]) new Object[list.length + list.length]);
-        return toArray(list);
     }
 
     /**
@@ -136,33 +136,19 @@ public class ArrayListASDV<E>
      * such that (o==null ? e==null : o.equals(e)).
      *
      * @param o - element whose presence in this list is to be tested
+     *
      * @return true if this list contains the specified element
+     *
      */
     @Override
     public boolean contains(Object o) {
 
-        // Markous answer
         for (int i = 0; i < this.index; ++i) {
             if (this.list[i].equals(o)) {
                 return true;
             }
         }
         return false;
-
-        // equals insert code 
-        /*
-        if (this == o) {
-            return true;
-        }
-        if (o == null) {
-            return false;
-        }
-        if (getClass() != o.getClass()) {
-            return false;
-        }
-        final ArrayListASDV<?> other = (ArrayListASDV<?>) o;
-        return Arrays.deepEquals(this.list, other.list);
-         */
     }
 
     /**
@@ -179,8 +165,7 @@ public class ArrayListASDV<E>
      */
     @Override
     public Object[] toArray() {
-
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return Arrays.copyOf(this.list, this.index);
     }
 
     /**
@@ -196,9 +181,13 @@ public class ArrayListASDV<E>
      */
     @Override
     public boolean remove(Object o) {
-
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-
+        for (int i = 0; i < this.index; ++i) {
+            if (this.list[i].equals(o)) {
+                remove(i);
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -208,8 +197,10 @@ public class ArrayListASDV<E>
      */
     @Override
     public void clear() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-
+        for (int i = 0; i < this.list.length; ++i) {
+            this.list[i] = null;
+        }
+        this.index = 0;
     }
 
     /**
@@ -218,12 +209,14 @@ public class ArrayListASDV<E>
      * @param index of the element to return
      * @return the element at the specified position in this list
      * @throws IndexOutOfBoundsException - if the index is out of range (index
-     * <= 0 || index GE size())
+     * GE 0 || index GE size())
      */
     @Override
     public E get(int index) {
-
-        throw new IndexOutOfBoundsException();
+        if (index < 0 || index >= this.index) {
+            throw new IndexOutOfBoundsException(index + " out of bounds");
+        }
+        return this.list[index];
     }
 
     /**
@@ -238,7 +231,12 @@ public class ArrayListASDV<E>
      */
     @Override
     public E set(int index, E element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (index < 0 || index >= this.index) {
+            throw new IndexOutOfBoundsException(index + " out of bounds");
+        }
+        E e = this.get(index);
+        this.list[index] = element;
+        return e;
     }
 
     /**
@@ -256,8 +254,24 @@ public class ArrayListASDV<E>
      */
     @Override
     public void add(int index, E element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (element == null) {
+            throw new NullPointerException("null parameter");
+        }
 
+        if (index < 0 || index > this.index) {
+            throw new IndexOutOfBoundsException(index + " out of bounds");
+        }
+
+        if (this.index + 1 > 0.75 * this.list.length) {
+            this.list = this.doubleSizeOfList();
+        }
+
+        for (int i = this.index; i > index; --i) {
+            list[i] = list[i - 1];
+        }
+
+        list[index] = element;
+        ++this.index;
     }
 
     /**
@@ -270,9 +284,18 @@ public class ArrayListASDV<E>
      * GE 0 || index GE size())
      */
     @Override
-    public E remove(int index
-    ) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public E remove(int index) {
+        if (index < 0 || index >= this.index) {
+            throw new IndexOutOfBoundsException(index + " out of bounds");
+        }
+
+        E e = this.list[index];
+        for (int i = index; i < this.index; ++i) {
+            this.list[i] = list[i + 1];
+        }
+        this.index--;
+
+        return e;
 
     }
 
@@ -289,7 +312,12 @@ public class ArrayListASDV<E>
     @Override
     public int indexOf(Object o
     ) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (int i = 0; i < ArrayListASDV.this.size(); ++i) {
+            if (this.list[i].equals(o)) {
+                return this.index;
+            }
+        }
+        return -1;
 
     }
 
@@ -307,7 +335,6 @@ public class ArrayListASDV<E>
     public int lastIndexOf(Object o
     ) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-
     }
 
     /**
@@ -343,7 +370,6 @@ public class ArrayListASDV<E>
     public List<E> subList(int fromIndex, int toIndex
     ) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-
     }
 
     /**
@@ -367,7 +393,8 @@ public class ArrayListASDV<E>
      * @throws NullPointerException - if the specified array is null
      */
     @Override
-    public <T> T[] toArray(T[] a) {
+    public <T> T[] toArray(T[] a
+    ) {
         Class<?> clazz = a.getClass();
         //>length of a is too small
         if (a.length < index) // Make a new array of a's runtime type
@@ -411,7 +438,12 @@ public class ArrayListASDV<E>
     }
 
     @Override
-    public ListIterator<E> listIterator(int index) {
+    public ListIterator<E> listIterator(int index
+    ) {
+
+        if (index < 0 || index >= ArrayListASDV.this.index) {
+            throw new IndexOutOfBoundsException(index + " out of bounds.");
+        }
 
         ListIterator<E> it = new ListIterator<E>() {
 
@@ -428,7 +460,8 @@ public class ArrayListASDV<E>
              */
             @Override
             public boolean hasNext() {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+                return current < ArrayListASDV.this.index ? true : false;
             }
 
             /**
@@ -444,20 +477,25 @@ public class ArrayListASDV<E>
              */
             @Override
             public E next() {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                return ArrayListASDV.this.list[current++];
+            }
+
+            @Override
+            public E previous() {
+                if (!hasPrevious()) {
+                    throw new NoSuchElementException();
+                }
+                return ArrayListASDV.this.list[--current];
 
             }
 
             @Override
             public boolean hasPrevious() {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-
-            }
-
-            @Override
-            public E previous() {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-
+                return current - 1 >= 0;
             }
 
             /**
@@ -471,8 +509,7 @@ public class ArrayListASDV<E>
              */
             @Override
             public int nextIndex() {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-
+                return current == ArrayListASDV.this.index ? ArrayListASDV.this.index : current++;
             }
 
             /**
@@ -486,14 +523,14 @@ public class ArrayListASDV<E>
              */
             @Override
             public int previousIndex() {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-
+                return current == 0 ? -1 : --current;
             }
 
             @Override
             public void forEachRemaining(Consumer<? super E> action) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-
+                while (hasNext()) {
+                    action.accept(next());
+                }
             }
 
             @Override
@@ -503,7 +540,7 @@ public class ArrayListASDV<E>
 
             @Override
             public void set(E e) {
-                throw new IndexOutOfBoundsException();
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
 
             @Override
@@ -525,10 +562,11 @@ public class ArrayListASDV<E>
      * collection Returns: true if this collection contains all of the elements
      * in the specified collection Throws: ClassCastException - if the types of
      * one or more elements in the specified collection are incompatible with
-     * this collection (optional) NullPointerException - if the specified
-     * collection contains one or more null elements and this collection does
-     * not permit null elements (optional), or if the specified collection is
-     * null.
+     * this collection.
+     *
+     * (optional) NullPointerException - if the specified collection contains
+     * one or more null elements and this collection does not permit null
+     * elements (optional), or if the specified collection is null.
      *
      * @param c - collection to be checked for containment in this collection
      * @return true if this collection contains all of the elements in the
@@ -537,19 +575,21 @@ public class ArrayListASDV<E>
      * specified collection are incompatible with this collection
      */
     @Override
-    public boolean containsAll(Collection<?> c) {
+    public boolean containsAll(Collection<?> c
+    ) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 
     }
 
     @Override
-    public boolean addAll(Collection<? extends E> c) {
+    public boolean addAll(Collection<? extends E> c
+    ) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 
     }
 
     @Override
-    public boolean addAll(int index, Collection<? extends E> c
+    public boolean addAll(int index, Collection< ? extends E> c
     ) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 
@@ -577,7 +617,8 @@ public class ArrayListASDV<E>
      * collection are incompatible with the specified collection
      */
     @Override
-    public boolean removeAll(Collection<?> c) {
+    public boolean removeAll(Collection<?> c
+    ) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 
     }
@@ -604,11 +645,6 @@ public class ArrayListASDV<E>
 
     public static void main(String[] args) throws ClassNotFoundException, InterruptedException {
 
-        ArrayList<Integer> aaa = new ArrayList();
-
-        System.out.println("------------------------------");
-        System.out.println("Test Work");
-
         ArrayListASDV<Integer> list1 = new ArrayListASDV();
         ArrayListASDV<String> list2 = new ArrayListASDV(4);
         ArrayListASDV<A1> list3 = new ArrayListASDV(4);
@@ -619,10 +655,8 @@ public class ArrayListASDV<E>
         list1.add(20);
         list3.add(new A1(-1));
         list3.add(new A1(-2));
-        Integer[] b
-                = {
-                    2, 3
-                };
+        Integer[] b = {2, 3};
+
         list1.toArray(b);
 
         list2.add("a");
@@ -640,7 +674,6 @@ public class ArrayListASDV<E>
         System.out.println(list1);
         System.out.println(list2);
         System.out.println(list3);
-
         System.out.println("------------------------------ ");
         System.out.println("test contains");
         System.out.println("contains E");
@@ -650,8 +683,6 @@ public class ArrayListASDV<E>
         System.out.println(list2);
         System.out.println("contains A(-1): " + list3.contains(new A1(-1)));
         System.out.println("contains A(-3): " + list3.contains(new A1(-3)));
-
-        /*
 
         System.out.println("------------------------------ ");
         System.out.print("test toArray(): ");
@@ -698,8 +729,10 @@ public class ArrayListASDV<E>
 
         System.out.println("\n---------------------------------------");
         System.out.println("test remove(Object)");
+        System.out.println(list2);
         list2.remove("y");
         System.out.println(list2);
+
         System.out.println(list2.remove("not in there"));
 
         System.out.println("\n---------------------------------------");
@@ -715,6 +748,8 @@ public class ArrayListASDV<E>
         System.out.println(list2.indexOf("25"));
         System.out.println(list2.indexOf("Y"));
         System.out.println(list2.indexOf("not there"));
+        
+        /*
 
         System.out.println("\n---------------------------------------");
         System.out.println("test lastndexOf()");
@@ -733,42 +768,51 @@ public class ArrayListASDV<E>
         System.out.println(l2);
         List<String> l3 = l2.subList(11, 11);
         System.out.println(l3);
-        try {
+        try
+          {
             l2.subList(12, 11);
-        } catch (Exception e) {
+          }
+        catch (Exception e)
+          {
             System.err.println(e);
-        }
+          }
 
         System.out.println("\n---------------------------------------");
         System.out.println("test toArray()");
         Object[] ar1 = l2.toArray();
-        for (Object obj : ar1) {
+        for (Object obj : ar1)
+          {
             System.out.print(obj + " ");
-        }
+          }
 
         System.out.println("\n---------------------------------------");
         System.out.println("test toArray(T[] a) small size a");
         ArrayListASDV<Integer> listX = new ArrayListASDV();
         listX.add(10);
         listX.add(20);
-        Integer[] a1 = {1};
+        Integer[] a1 =
+          {
+            1
+          };
         ar = listX.toArray(ar);
-        for (int i = 0; i < ar.length; ++i) {
+        for (int i = 0; i < ar.length; ++i)
+          {
             System.out.println(ar[i]);
-        }
+          }
         System.out.println("\n---------------------------------------");
         System.out.println("test toArray(T[] a) Big size a");
         ArrayListASDV<A1> listA1 = new ArrayListASDV();
         listA1.add(new A1(100));
 
-        A1[] a11
-                = {
-                    new A1(-1), new A1(-2), new A1(3)
-                };
+        A1[] a11 =
+          {
+            new A1(-1), new A1(-2), new A1(3)
+          };
         listA1.toArray(a11);
-        for (int i = 0; i < a11.length; ++i) {
+        for (int i = 0; i < a11.length; ++i)
+          {
             System.out.println(a11[i]);
-        }
+          }
 
         System.out.println("");
         System.out.println("\n---------------------------------------");
@@ -778,9 +822,10 @@ public class ArrayListASDV<E>
 
         Iterator<String> it = list2.iterator();
 
-        while (it.hasNext()) {
+        while (it.hasNext())
+          {
             System.out.print(it.next() + " ");
-        }
+          }
         System.out.println("");
 
         System.out.println("\n---------------------------------------");
@@ -791,20 +836,20 @@ public class ArrayListASDV<E>
         li3.add(30);
         li3.add(40);
         System.out.println(li3);
-
-        
         ListIterator<Integer> li = li3.listIterator(2);
-        while (li.hasNext()) {
+        while (li.hasNext())
+          {
             System.out.print("\tnext index: " + li.nextIndex());
             System.out.print("\tprevious index: " + li.previousIndex());
             System.out.print("\t" + li.next());
-        }
+          }
         System.out.println("");
-        while (li.hasPrevious()) {
+        while (li.hasPrevious())
+          {
             System.out.print("\tnext index: " + li.nextIndex());
             System.out.print("\tprevious index: " + li.previousIndex());
             System.out.print("\t" + li.previous());
-        }
+          }
         System.out.println("");
         System.out.println("next index: " + li.nextIndex());
         System.out.println("previous index: " + li.previousIndex());
@@ -812,9 +857,11 @@ public class ArrayListASDV<E>
         System.out.println("\n---------------------------------------");
         System.out.println("test forEachRemaining()");
         System.out.println(li.next());
-        li.forEachRemaining(new Consumer<Integer>() {
+        li.forEachRemaining(new Consumer<Integer>()
+        {
             @Override
-            public void accept(Integer t) {
+            public void accept(Integer t)
+            {
                 System.out.print(t + 1 + " ");
             }
         });
@@ -822,13 +869,15 @@ public class ArrayListASDV<E>
         System.out.println("\n---------------------------------------");
         System.out.println("test containsAll(Collection)");
 
-        List<Integer> ar33 = Arrays.asList(new Integer[]{
+        List<Integer> ar33 = Arrays.asList(new Integer[]
+          {
             10, 20
-        });
+          });
         System.out.println(li3.containsAll(ar33));
-        ar33 = Arrays.asList(new Integer[]{
+        ar33 = Arrays.asList(new Integer[]
+          {
             10, -1
-        });
+          });
         System.out.println(li3.containsAll(ar33));
 
         System.out.println("\n---------------------------------------");
@@ -838,51 +887,63 @@ public class ArrayListASDV<E>
         li3.add(11);
         li3.add(10);
         System.out.println(li3);
-        ar33 = Arrays.asList(new Integer[]{
+        ar33 = Arrays.asList(new Integer[]
+          {
             10
-        });
+          });
         System.out.println(li3.removeAll(ar33));
         System.out.println(li3);
-        List<Object> oar = Arrays.asList(new Object[]{
+        List<Object> oar = Arrays.asList(new Object[]
+          {
             3.3, 40, "abc"
-        });
-        try {
+          });
+        try
+          {
             li3.removeAll(oar);
-        } catch (ClassCastException e) {
+          }
+        catch (ClassCastException e)
+          {
             Thread.sleep(100);
             System.err.println(e);
-        }
+          }
         System.out.println(li3);
-        List<A1> sar = Arrays.asList(new A1[]{
+        List<A1> sar = Arrays.asList(new A1[]
+          {
             new A1(999)
-        });
-        try {
+          });
+        try
+          {
             li3.removeAll(sar);
-        } catch (ClassCastException e) {
+          }
+        catch (ClassCastException e)
+          {
             Thread.sleep(100);
             System.err.println(e);
-        }
+          }
         System.out.println(li3);
 
         System.out.println("\n---------------------------------------");
         System.out.println("test retainAll(Collection)");
-        ar33 = Arrays.asList(new Integer[]{
+        ar33 = Arrays.asList(new Integer[]
+          {
             30
-        });
+          });
         li3.retainAll(ar33);
         System.out.println(li3);
         System.out.println("\n---------------------------------------");
         System.out.println("test addAll(Collection)");
-        ar33 = Arrays.asList(new Integer[]{
+        ar33 = Arrays.asList(new Integer[]
+          {
             1, 2, 3, 4
-        });
+          });
         li3.addAll(ar33);
         System.out.println(li3);
         System.out.println("\n---------------------------------------");
         System.out.println("test addAll(index, Collection)");
-        ar33 = Arrays.asList(new Integer[]{
+        ar33 = Arrays.asList(new Integer[]
+          {
             100, 200, 300
-        });
+          });
         li3.addAll(2, ar33);
         System.out.println(li3);
          */
