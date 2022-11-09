@@ -62,7 +62,7 @@ public class PriorityQueueASDV<E extends Comparable<E>>
         }
 
         int index = findCorrectPositionToInsertElement(e);
-        // int index = findCorrectPositionToInsertElementHashCode(e);
+        //int index = findCorrectPositionToInsertElementHashCode(e);
 
         //2. we add at size ( last node)
         if (index == size()) {
@@ -74,6 +74,9 @@ public class PriorityQueueASDV<E extends Comparable<E>>
             newNode.r = head;
             this.head.l = newNode;
             this.head = newNode;
+            if (size() == 1) {
+                tail = head;
+            }
         } //4. we add in the middle
         else {
             Node<E> p = head;
@@ -94,7 +97,7 @@ public class PriorityQueueASDV<E extends Comparable<E>>
             p.r = newNode; //we connect the right the  node BEFORE the node
             //to be inserted to the new node
 
-            p.r.l = newNode;//we connect the left of the node AFTER the node 
+            p.r.r.l = newNode;//we connect the left of the node AFTER the node 
             //to be iserted to the new node
         }
 
@@ -130,7 +133,6 @@ public class PriorityQueueASDV<E extends Comparable<E>>
                 break;
             }
         }
-
         return pos;
     }
 
@@ -159,7 +161,7 @@ public class PriorityQueueASDV<E extends Comparable<E>>
      */
     @Override
     public boolean offer(E e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return add(e);
     }
 
     /**
@@ -293,6 +295,13 @@ public class PriorityQueueASDV<E extends Comparable<E>>
         return true;
     }
 
+    /**
+     *
+     * @param pos
+     * @param e
+     * @throws IndexOutOfBoundsException - if pos less 0 OR pos greater-equal size()
+     * @return
+     */
     private boolean removeAt(int pos, E e) {
         if (pos < 0 || pos >= size()) {
             throw new IndexOutOfBoundsException(pos + "is Out of Bounds!");
@@ -393,19 +402,119 @@ public class PriorityQueueASDV<E extends Comparable<E>>
         pq2.add("Lafayette");
         pq2.add("Berlin");
 
-        System.out.println("element ========");
-        System.out.println(pq1.element());
-        System.out.println("element ========");
-
         System.out.println(pq2);
 
-        System.out.println(pq2.peek());
-
         //TEST IT FULLY HERE. FOR ALL METHODS AND ALL CASES.
-        //HAve the JAva PriorityQueue below
-        System.out.println("Remove from front: ");
-        pq1.remove("Athen");
+        //Have the Jzva PriorityQueue below
+        System.out.println("\n--> PriorityQueueASDV  testing remove(object o)");
+        System.out.println("\n\tremove from front Athens");
+        pq1.remove("Athens");
+        pq2.remove("Athens");
         System.out.println(pq1);
+        System.out.println(pq2);
+
+        System.out.println("\n\tremove from end Paris");
+        pq1.remove("Paris");
+        pq2.remove("Paris");
+        System.out.println(pq1);
+        System.out.println(pq1);
+
+        System.out.println("\n\tremove from the middle Lafayette");
+        pq1.remove("Lafayette");
+        pq2.remove("Lafayette");
+        System.out.println(pq1);
+        System.out.println(pq2);
+
+        System.out.println("\n\tadd at the end Stocholm");
+        pq1.add("Stocholm");
+        pq2.add("Stocholm");
+        System.out.println(pq1);
+        System.out.println(pq2);
+
+        System.out.println("\n\tremove from the middle London");
+        pq1.remove("London");
+        pq2.remove("London");
+        System.out.println(pq1);
+        System.out.println(pq2);
+
+        System.out.println("\n\tremove from the front Berlin");
+        pq1.remove("Berlin");
+        pq2.remove("Berlin");
+        System.out.println(pq1);
+        System.out.println(pq2);
+
+        System.out.println("\n\tremove from the front/end Stocholm");
+        pq1.remove("Stocholm");
+        pq2.remove("Stocholm");
+        System.out.println(pq1);
+        System.out.println(pq2);
+
+        System.out.println("\n\tremove from empty queue");
+        pq1.remove("Stocholm");
+        pq2.remove("Stocholm");
+        System.out.println(pq1);
+        System.out.println(pq2);
+
+        System.out.println("\n--> PriorityQueueASDV  recreate priority queues from empty");
+        pq1.add("Paris");
+        pq1.add("Athens");
+        pq1.add("London");
+        pq1.add("Lafayette");
+        pq1.add("Berlin");
+        pq1.add("Zurich");
+
+        pq2.add("Paris");
+        pq2.add("Athens");
+        pq2.add("London");
+        pq2.add("Lafayette");
+        pq2.add("Berlin");
+        pq2.add("Zurich");
+        System.out.println(pq1);
+        System.out.println(pq2);
+
+        System.out.println("\n\n+++HERE YOU TEST ALL YOUR METHODS FULLY, and the methods of Colleciion PriorityQueue");
+
+        System.out.println("\n\t  offer New York");
+        pq1.offer("New York");
+        pq2.offer("New York");
+        System.out.println(pq1);
+        System.out.println(pq2);
+
+        System.out.println("\n\t  offer Miami");
+        pq1.offer("Miami");
+        pq2.offer("Miami");
+        System.out.println(pq1);
+        System.out.println(pq2);
+
+        System.out.println("\n\t  offer null");
+        try {
+            pq1.offer(null);
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+
+        try {
+            pq2.offer(null);
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        System.out.println(pq1);
+        System.out.println(pq2);
+
+        System.out.println("\n\t  offer ClassCastException with Object");
+        try {
+            pq1.offer((String) new Object());
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+
+        try {
+            pq2.offer((String) new Object());
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        System.out.println(pq1);
+        System.out.println(pq2);
     }
 
 }
