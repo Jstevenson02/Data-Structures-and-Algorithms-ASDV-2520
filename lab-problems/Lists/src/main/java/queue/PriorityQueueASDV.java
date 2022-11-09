@@ -24,29 +24,27 @@ public class PriorityQueueASDV<E extends Comparable<E>>
     }
 
     /**
-     * Inserts the specified element into this queue if it is possible to do so
-     * immediately without violating capacity restrictions, returning true upon
-     * success and throwing an IllegalStateException if no space is currently
-     * available.
+     * Inserts the specified element into this queue if it is possible to do so immediately without
+     * violating capacity restrictions, returning true upon success and throwing an
+     * IllegalStateException if no space is currently available.
      *
      * Specified by: add in interface Collection<E>
-     * Parameters: e - the element to add Returns: true (as specified by
-     * Collection.add(E)) Throws: IllegalStateException - if the element cannot
-     * be added at this time due to capacity restrictions ClassCastException -
-     * if the class of the specified element prevents it from being added to
-     * this queue NullPointerException - if the specified element is null and
-     * this queue does not permit null elements IllegalArgumentException - if
-     * some property of this element prevents it from being added to this queue
+     * Parameters: e - the element to add Returns: true (as specified by Collection.add(E)) Throws:
+     * IllegalStateException - if the element cannot be added at this time due to capacity
+     * restrictions ClassCastException - if the class of the specified element prevents it from
+     * being added to this queue NullPointerException - if the specified element is null and this
+     * queue does not permit null elements IllegalArgumentException - if some property of this
+     * element prevents it from being added to this queue
      *
      * @param e - the element to add
      * @return true if this collection changed as a result of the call
-     * @throws IllegalStateException - if the element cannot be added at this
-     * time due to capacity restrictions
+     * @throws IllegalStateException - if the element cannot be added at this time due to capacity
+     * restrictions
      * @throws ClassCastException - if the class of the specified element
-     * @throws NullPointerException - if the specified element is null and this
-     * queue does not permit null elements
-     * @throws IllegalArgumentException - if some property of this element
-     * prevents it from being added to this queue
+     * @throws NullPointerException - if the specified element is null and this queue does not
+     * permit null elements
+     * @throws IllegalArgumentException - if some property of this element prevents it from being
+     * added to this queue
      */
     @Override
     public boolean add(E e) {
@@ -103,6 +101,13 @@ public class PriorityQueueASDV<E extends Comparable<E>>
         return true;
     }
 
+    /**
+     * public int size() Description copied from interface: Collection Returns the number of
+     * elements in this collection. If this collection contains more than Integer.MAX_VALUE
+     * elements, returns Integer.MAX_VALUE. Specified by: size in interface Collection<E>
+     * Specified by: size in class AbstractCollection<E>
+     * Returns: the number of elements in this collection
+     */
     @Override
     public int size() {
         Node<E> p = this.head;
@@ -144,26 +149,58 @@ public class PriorityQueueASDV<E extends Comparable<E>>
         return pos;
     }
 
+    /**
+     * public boolean offer(E e) Inserts the specified element into this priority queue. Specified
+     * by: offer in interface Queue<E>
+     * Parameters: e - the element to add Returns: true (as specified by Queue.offer(E)) Throws:
+     * ClassCastException - if the specified element cannot be compared with elements currently in
+     * this priority queue according to the priority queue's ordering NullPointerException - if the
+     * specified element is null
+     */
     @Override
     public boolean offer(E e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * public boolean remove(Object o) Removes a single instance of the specified element from this
+     * queue, if it is present. More formally, removes an element e such that o.equals(e), if this
+     * queue contains one or more such elements. Returns true if and only if this queue contained
+     * the specified element (or equivalently, if this queue changed as a result of the call).
+     * Specified by: remove in interface Collection<E>
+     * Overrides: remove in class AbstractCollection<E>
+     * Parameters: o - element to be removed from this queue, if present Returns: true if this queue
+     * changed as a result of the call
+     */
     @Override
     public E remove() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * public E poll() Description copied from interface: Queue Retrieves and removes the head of
+     * this queue, or returns null if this queue is empty. Specified by: poll in interface Queue<E>
+     * Returns: the head of this queue, or null if this queue is empty
+     */
     @Override
     public E poll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Retrieves, but does not remove, the head of this queue.
+     */
     @Override
     public E element() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (E) this.head;
     }
 
+    /**
+     * public E peek() Description copied from interface: Queue Retrieves, but does not remove, the
+     * head of this queue, or returns null if this queue is empty. Specified by: peek in interface
+     * Queue<E>
+     * Returns: the head of this queue, or null if this queue is empty
+     */
     @Override
     public E peek() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -174,16 +211,44 @@ public class PriorityQueueASDV<E extends Comparable<E>>
         return head == null && tail == null ? true : false;
     }
 
+    /**
+     * public boolean contains(Object o) Returns true if this queue contains the specified element.
+     * More formally, returns true if and only if this queue contains at least one element e such
+     * that o.equals(e). Specified by: contains in interface Collection<E>
+     * Overrides: contains in class AbstractCollection<E>
+     * Parameters: o - object to be checked for containment in this queue Returns: true if this
+     * queue contains the specified element
+     */
     @Override
     public boolean contains(Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * public Iterator<E> iterator() Returns an iterator over the elements in this queue. The
+     * iterator does not return the elements in any particular order. Specified by: iterator in
+     * interface Iterable<E>
+     * Specified by: iterator in interface Collection<E>
+     * Specified by: iterator in class AbstractCollection<E>
+     * Returns: an iterator over the elements in this queue
+     */
     @Override
     public Iterator<E> iterator() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * public Object[] toArray() Returns an array containing all of the elements in this queue. The
+     * elements are in no particular order. The returned array will be "safe" in that no references
+     * to it are maintained by this queue. (In other words, this method must allocate a new array).
+     * The caller is thus free to modify the returned array.
+     *
+     * This method acts as bridge between array-based and collection-based APIs.
+     *
+     * Specified by: toArray in interface Collection<E>
+     * Overrides: toArray in class AbstractCollection<E>
+     * Returns: an array containing all of the elements in this queue
+     */
     @Override
     public Object[] toArray() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -194,6 +259,16 @@ public class PriorityQueueASDV<E extends Comparable<E>>
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * public boolean remove(Object o) Removes a single instance of the specified element from this
+     * queue, if it is present. More formally, removes an element e such that o.equals(e), if this
+     * queue contains one or more such elements. Returns true if and only if this queue contained
+     * the specified element (or equivalently, if this queue changed as a result of the call).
+     * Specified by: remove in interface Collection<E>
+     * Overrides: remove in class AbstractCollection<E>
+     * Parameters: o - element to be removed from this queue, if present Returns: true if this queue
+     * changed as a result of the call *
+     */
     @Override
     public boolean remove(Object o) {
         if (o == null) {
@@ -317,6 +392,11 @@ public class PriorityQueueASDV<E extends Comparable<E>>
         pq2.add("London");
         pq2.add("Lafayette");
         pq2.add("Berlin");
+
+        System.out.println("element ========");
+        System.out.println(pq1.element());
+        System.out.println("element ========");
+
         System.out.println(pq2);
 
         System.out.println(pq2.peek());
