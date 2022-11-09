@@ -4,6 +4,8 @@
  */
 package trees;
 
+import java.util.Stack;
+
 /**
  *
  * @author jacob
@@ -71,7 +73,8 @@ public class BinaryTree<E extends Comparable<E>> {
     }
 
     public void inOrder() {
-        inOrder(root);
+        inOrderLoop();
+//        inOrder(root);
     }
 
     private void inOrder(Node<E> p) {
@@ -99,14 +102,81 @@ public class BinaryTree<E extends Comparable<E>> {
 
     }
 
+    private void inOrderLoop() {
+        Stack<Node<E>> stack = new Stack();
+        stack.push(root);
+
+        Node<E> p = root;
+
+        while (stack.empty() == false) {
+
+            while (p != null) {
+                p = p.lChild;
+                if (p != null) {
+                    stack.push(p);
+                }
+            }
+
+            Node<E> topOfStack = stack.pop();
+            System.out.println(topOfStack.e);
+
+            if (topOfStack.rChild != null) {
+                p = topOfStack.rChild;
+                stack.push(p);
+            }
+        }
+    }
+
+    public int sizeLoops() {
+
+        Stack<Node<E>> stack = new Stack();
+        stack.push(root);
+
+        int count = 0;
+        Node<E> p = root;
+
+        while (stack.empty() == false) {
+
+            while (p != null) {
+                p = p.lChild;
+                if (p != null) {
+                    stack.push(p);
+                }
+            }
+
+            Node<E> topOfStack = stack.pop();
+            System.out.println(topOfStack.e);
+            ++count;
+
+            if (topOfStack.rChild != null) {
+                p = topOfStack.rChild;
+                stack.push(p);
+            }
+        }
+        return count;
+    }
+
+    public int size() {
+        return size(root);
+    }
+
+    private int size(Node<E> p) {
+        if (p == null) {
+            return 0;
+        }
+        return 1 + size(p.lChild) + size(p.rChild);
+    }
+
     public static void main(String[] args) {
         BinaryTree<Integer> bt = new BinaryTree();
         bt.insert(100);
         bt.insert(120);
-        bt.insert(170);
         bt.insert(130);
+        bt.insert(80);
+        bt.insert(1);
         bt.insert(2);
-        bt.insert(17);
+        bt.insert(90);
+        bt.insert(110);
 
         System.out.println("==== Order ====");
         bt.inOrder();
@@ -116,6 +186,15 @@ public class BinaryTree<E extends Comparable<E>> {
 
         System.out.println("==== Postorder ====");
         bt.postOrder();
+
+        System.out.println("==== In Order ====");
+        bt.inOrderLoop();
+
+        System.out.println("==== Size ====");
+        System.out.println(bt.size());
+
+        System.out.println("==== Size Non Recursive====");
+        System.out.println(bt.sizeLoops());
 
     }
 }
