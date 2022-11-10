@@ -127,6 +127,43 @@ public class BinaryTree<E extends Comparable<E>> {
         }
     }
 
+    private int depthRecursive(Node<E> p) {
+
+        if (p == null) {
+            return 0;
+        }
+        return 1 + Math.max(depthRecursive(p.lChild), depthRecursive(p.rChild));
+    }
+
+    private int depthNonRecursive() {
+        Node<E> p = root;
+        int depth = 0;
+        Stack<Node<E>> xNodes = new Stack<>();
+        Stack<Node<E>> pNodes = new Stack<>();
+
+        xNodes.push(p);
+
+        while (!xNodes.empty()) {
+            p = xNodes.peek();
+            if (!pNodes.empty() && p == pNodes.peek()) {
+                if (pNodes.size() > depth) {
+                    depth = pNodes.size();
+                }
+                pNodes.pop();
+                xNodes.pop();
+            } else {
+                pNodes.push(p);
+                if (p.rChild != null) {
+                    xNodes.push(p.rChild);
+                }
+                if (p.lChild != null) {
+                    xNodes.push(p.lChild);
+                }
+            }
+        }
+        return depth;
+    }
+
     public int sizeLoops() {
 
         Stack<Node<E>> stack = new Stack();
@@ -146,7 +183,7 @@ public class BinaryTree<E extends Comparable<E>> {
 
             Node<E> topOfStack = stack.pop();
             System.out.println(topOfStack.e);
-            ++count;
+            count++;
 
             if (topOfStack.rChild != null) {
                 p = topOfStack.rChild;
@@ -195,6 +232,12 @@ public class BinaryTree<E extends Comparable<E>> {
 
         System.out.println("==== Size Non Recursive====");
         System.out.println(bt.sizeLoops());
+
+        System.out.println("==== Depth Non Recursive====");
+        System.out.println(bt.depthNonRecursive());
+
+        System.out.println("==== Depth Recursive====");
+        System.out.println(bt.depthRecursive(bt.root));
 
     }
 }
