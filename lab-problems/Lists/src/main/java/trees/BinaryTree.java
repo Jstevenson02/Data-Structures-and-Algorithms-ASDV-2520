@@ -22,6 +22,313 @@ public class BinaryTree<E extends Comparable<E>> {
         Node<E> rChild;
     }
 
+    public boolean remove(E e) {
+        Node<E> nodeToDelete = root;
+        Node<E> parentNode = root;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        boolean found = false;
+
+        while (nodeToDelete != null) {
+
+            if (e.compareTo(nodeToDelete.e) > 0)//go right
+            {
+                parentNode = nodeToDelete;
+                nodeToDelete = nodeToDelete.rChild;
+            } else if (e.compareTo(nodeToDelete.e) < 0)//go left
+            {
+                parentNode = nodeToDelete;
+                nodeToDelete = nodeToDelete.lChild;
+            } else {
+                found = true;
+                break;
+            }
+        }
+        if (found == false) {
+            return false;
+        }
+
+        //1. delete case has no children
+        if (nodeToDelete.lChild == null && nodeToDelete.rChild == null) {
+            if (nodeToDelete.e.compareTo(parentNode.e) > 0)//right child
+            {
+                parentNode.rChild = null;
+            } else {
+                parentNode.lChild = null;
+            }
+        } else if (nodeToDelete.lChild == null || nodeToDelete.rChild == null) //2.  1 child
+        {
+            if (nodeToDelete == parentNode.rChild)//is the right child of teh parent
+            {
+                if (nodeToDelete.lChild != null) {
+                    parentNode.rChild = nodeToDelete.lChild;
+                } else {
+                    parentNode.rChild = nodeToDelete.rChild;
+                }
+            } else//is the right child of the parent
+            {
+                if (nodeToDelete.lChild != null) {
+                    parentNode.lChild = nodeToDelete.lChild;
+                } else {
+                    parentNode.lChild = nodeToDelete.rChild;
+                }
+            }
+        } else//3 
+        {
+            Node<E> p = nodeToDelete;
+            // take left
+            p = p.lChild;
+
+            // while != null
+            Node<E> parentOfTrail = p;
+            Node<E> pTrail = p;
+            while (p != null) {
+                parentOfTrail = pTrail;
+                pTrail = p;
+                p = p.rChild;
+            }
+
+            // swap nodeToDelete with pTrail
+            nodeToDelete.e = pTrail.e;
+            parentOfTrail.rChild = pTrail.lChild;
+        }
+        return true;
+    }
+
     public boolean insert(E e) {
         Node<E> newNode = new Node<E>();
         newNode.e = e;
@@ -207,13 +514,12 @@ public class BinaryTree<E extends Comparable<E>> {
     public static void main(String[] args) {
         BinaryTree<Integer> bt = new BinaryTree();
         bt.insert(100);
+        bt.insert(180);
         bt.insert(120);
-        bt.insert(130);
-        bt.insert(80);
-        bt.insert(1);
-        bt.insert(2);
-        bt.insert(90);
-        bt.insert(110);
+        bt.insert(140);
+        bt.insert(40);
+        bt.insert(46);
+        bt.insert(45);
 
         System.out.println("==== Order ====");
         bt.inOrder();
@@ -238,6 +544,10 @@ public class BinaryTree<E extends Comparable<E>> {
 
         System.out.println("==== Depth Recursive====");
         System.out.println(bt.depthRecursive(bt.root));
+
+        System.out.println("==== Remove ====");
+        System.out.println(bt.remove(40));
+        bt.inOrder();
 
     }
 }
