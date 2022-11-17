@@ -22,6 +22,157 @@ public class BinaryTree<E extends Comparable<E>> {
         Node<E> rChild;
     }
 
+    public boolean removeOneRightThenLeft(E e) {
+        Node<E> nodeToBedeleted = root;
+        Node<E> parentofNodeToBedeleted = root;
+        boolean found = false;
+
+        while (nodeToBedeleted != null) {
+
+            if (e.compareTo(nodeToBedeleted.e) > 0)//go right
+            {
+                parentofNodeToBedeleted = nodeToBedeleted;
+                nodeToBedeleted = nodeToBedeleted.rChild;
+            } else if (e.compareTo(nodeToBedeleted.e) < 0)//go left
+            {
+                parentofNodeToBedeleted = nodeToBedeleted;
+                nodeToBedeleted = nodeToBedeleted.lChild;
+            } else {
+                found = true;
+                break;
+            }
+        }
+        if (found == false) {
+            return false;
+        }
+
+        //>1. delete case has no children
+        if (nodeToBedeleted.lChild == null && nodeToBedeleted.rChild == null) {
+            if (nodeToBedeleted.e.compareTo(parentofNodeToBedeleted.e) > 0)//right child
+            {
+                parentofNodeToBedeleted.rChild = null;
+            } else {
+                parentofNodeToBedeleted.lChild = null;
+            }
+        } else if (nodeToBedeleted.lChild == null || nodeToBedeleted.rChild == null) //2.  1 child
+        {
+            if (nodeToBedeleted == parentofNodeToBedeleted.rChild)//is the right child of teh parent
+            {
+                if (nodeToBedeleted.rChild != null) {
+                    parentofNodeToBedeleted.lChild = nodeToBedeleted.rChild;
+                } else {
+                    parentofNodeToBedeleted.lChild = nodeToBedeleted.lChild;
+                }
+            } else//is the right child of the parent
+            {
+                if (nodeToBedeleted.rChild != null) {
+                    parentofNodeToBedeleted.rChild = nodeToBedeleted.rChild;
+                } else {
+                    parentofNodeToBedeleted.rChild = nodeToBedeleted.lChild;
+                }
+            }
+            // DELETE ME
+        } else//3 
+        {
+            Node<E> p = nodeToBedeleted;
+            //take a left
+            p = p.lChild;
+
+            ///keep on going right until you hits null
+            Node<E> pTrail = p;
+            Node<E> parentOfTrail = p;
+
+            while (p != null) {
+                parentOfTrail = pTrail;
+                pTrail = p;
+                p = p.rChild;
+            }
+            //pTail here, points to the node that will swap contents with node to be deleted
+            //and parentOfTrail points to the parent pTrail
+
+            //swap ontents of node to be deleted with prTail
+            nodeToBedeleted.e = pTrail.e;
+            parentOfTrail.rChild = pTrail.lChild;
+        }
+
+        return true;
+    }
+
+    public boolean remove(E e) {
+        Node<E> nodeToBedeleted = root;
+        Node<E> parentofNodeToBedeleted = root;
+        boolean found = false;
+
+        while (nodeToBedeleted != null) {
+
+            if (e.compareTo(nodeToBedeleted.e) > 0)//go right
+            {
+                parentofNodeToBedeleted = nodeToBedeleted;
+                nodeToBedeleted = nodeToBedeleted.rChild;
+            } else if (e.compareTo(nodeToBedeleted.e) < 0)//go left
+            {
+                parentofNodeToBedeleted = nodeToBedeleted;
+                nodeToBedeleted = nodeToBedeleted.lChild;
+            } else {
+                found = true;
+                break;
+            }
+        }
+        if (found == false) {
+            return false;
+        }
+
+        //1. delete case has no children
+        if (nodeToBedeleted.lChild == null && nodeToBedeleted.rChild == null) {
+            if (nodeToBedeleted.e.compareTo(parentofNodeToBedeleted.e) > 0)//right child
+            {
+                parentofNodeToBedeleted.rChild = null;
+            } else {
+                parentofNodeToBedeleted.lChild = null;
+            }
+        } else if (nodeToBedeleted.lChild == null || nodeToBedeleted.rChild == null) //2.  1 child
+        {
+            if (nodeToBedeleted == parentofNodeToBedeleted.rChild)//is the left child of teh parent
+            {
+                if (nodeToBedeleted.lChild != null) {
+                    parentofNodeToBedeleted.rChild = nodeToBedeleted.lChild;
+                } else {
+                    parentofNodeToBedeleted.rChild = nodeToBedeleted.rChild;
+                }
+            } else//is the left child of the parent
+            {
+                if (nodeToBedeleted.lChild != null) {
+                    parentofNodeToBedeleted.lChild = nodeToBedeleted.lChild;
+                } else {
+                    parentofNodeToBedeleted.lChild = nodeToBedeleted.rChild;
+                }
+            }
+        } else//3 
+        {
+            Node<E> p = nodeToBedeleted;
+            //take a left
+            p = p.lChild;
+
+            ///keep on going right until it hits null
+            Node<E> pTrail = p;
+            Node<E> parentOfTrail = p;
+
+            while (p != null) {
+                parentOfTrail = pTrail;
+                pTrail = p;
+                p = p.rChild;
+            }
+            //pTail here, points to the node that will swap contents with node to be deleted
+            //and parentOfTrail points to the parent pTrail
+
+            //swap ontents of node to be deleted with prTail
+            nodeToBedeleted.e = pTrail.e;
+            parentOfTrail.rChild = pTrail.lChild;
+        }
+
+        return true;
+    }
+
     public boolean insert(E e) {
         Node<E> newNode = new Node<E>();
         newNode.e = e;
@@ -238,6 +389,11 @@ public class BinaryTree<E extends Comparable<E>> {
 
         System.out.println("==== Depth Recursive====");
         System.out.println(bt.depthRecursive(bt.root));
+
+        System.out.println("==== Remove ====");
+        bt.inOrder();
+        bt.removeOneRightThenLeft(80);
+        bt.inOrder();
 
     }
 }
