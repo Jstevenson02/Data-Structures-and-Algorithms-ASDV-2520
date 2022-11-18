@@ -1,27 +1,5 @@
 package pointers;
 
-/**
- *
- *
- * The Node at ( 0,0 ) has its pointers: up --> null down --> Node at (1,0) left --> null right --?
- * Node at (0,1)
- *
- *
- * left --> Node(2,2) right --? Node at ( 2,4) * A Node at ( 2,3 ) has its pointers: up -->
- * Node(1,3) down --> Node at (3,3) left --> Node(2,2) right --? Node at ( 2,4)
- *
- * And so on.
- *
- * @author ASDV2
- * @param <E>
- */
-/**
- * Creates a rows x columns table
- *
- * @param rows number of roes
- * @param columns number of columns #thows IllegalArgumentException if rows/columns are not GT zero.
- * @return true if the table was created successfully, false otherwise
- */
 public class SpreadSheet<E> implements Table<E>, Cloneable {
 
     private int rows;//current rows in spreadsheet
