@@ -3,20 +3,18 @@ package pointers;
 import pointers.Table;
 
 /**
- * The table is a collection of horizontal quadruple linked lists. The table
- * cannot be jagged.
+ * The table is a collection of horizontal quadruple linked lists. The table cannot be jagged.
  *
- * For example, row 0 is a double linked list and the head of the list points at
- * cell (0,0) Row 1 is a double linked list and the head of the list points at
- * cell (0,0). Row 2 is a double linked list and the head of the list points at
- * cell (1,0) And so on.
+ * For example, row 0 is a double linked list and the head of the list points at cell (0,0) Row 1 is
+ * a double linked list and the head of the list points at cell (0,0). Row 2 is a double linked list
+ * and the head of the list points at cell (1,0) And so on.
  *
- * The Node at ( 0,0 ) has its pointers: up --> null down --> Node at (1,0) left
- * --> null right --? Node at (0,1)
+ * The Node at ( 0,0 ) has its pointers: up --> null down --> Node at (1,0) left --> null right --?
+ * Node at (0,1)
  *
  *
- *  * A Node at ( 2,3 ) has its pointers: up --> Node(1,3) down --> Node at
- * (3,3) left --> Node(2,2) right --? Node at ( 2,4)
+ *  * A Node at ( 2,3 ) has its pointers: up --> Node(1,3) down --> Node at (3,3) left --> Node(2,2)
+ * right --? Node at ( 2,4)
  *
  * And so on.
  *
@@ -42,36 +40,34 @@ public class SpreadSheet<E> implements Table<E>, Cloneable {
      * Creates a rows x columns table
      *
      * @param rows number of roes
-     * @param columns number of columns #thows IllegalArgumentException if
-     * rows/columns are not GT zero.
-     * @return true if the table was created successfully, false othrwise
+     * @param columns number of columns #thows IllegalArgumentException if rows/columns are not GT
+     * zero.
+     * @return true if the table was created successfully, false otherwise
      */
     public boolean createTable(int rows, int columns) {
-        this.rows = rows;
-        this.columns = columns;
 
-        Node<E> previousHorz = null;
-        Node<E> previousVert = null;
-        for (int i = 0; i < rows; ++i) {
-            for (int j = 0; j < columns; ++j) {
+        Node<E> previousHorzNode = null;
+        Node<E> previousVertNode = null;
+        for (int horzIndex = 0; horzIndex < rows; ++horzIndex) {
+            for (int vertIndex = 0; vertIndex < columns; ++vertIndex) {
                 Node<E> newNode = new Node();
-                if (i == 0 && j == 0)//node at ( 0,0)//head node of 1st row
+                if (horzIndex == 0 && vertIndex == 0)//node at (0, 0) //head node of 1st row
                 {
-                    startNode = previousHorz = previousVert = newNode;
-                } else if (j == 0)// node at ( i,0)//head node of every row
+                    startNode = previousHorzNode = previousVertNode = newNode;
+                } else if (vertIndex == 0)// node at (vertIndex, 0) //head node of every row
                 {
-                    newNode.up = previousVert;
-                    previousVert.down = newNode;
-                    previousHorz = previousVert = newNode;
+                    newNode.up = previousVertNode;
+                    previousVertNode.down = newNode;
+                    previousHorzNode = previousVertNode = newNode;
                 } else//2nd to last node in every row
                 {
-                    newNode.left = previousHorz;
-                    previousHorz.right = newNode;
-                    if (i != 0)//middle rows connect up 
+                    newNode.left = previousHorzNode;
+                    previousHorzNode.right = newNode;
+                    if (horzIndex != 0)//middle rows connect up 
                     {
-                        newNode.up = previousHorz.up.right;
+                        newNode.up = previousHorzNode.up.right;
                     }
-                    previousHorz = previousHorz.right;
+                    previousHorzNode = previousHorzNode.right;
                 }
             }
         }

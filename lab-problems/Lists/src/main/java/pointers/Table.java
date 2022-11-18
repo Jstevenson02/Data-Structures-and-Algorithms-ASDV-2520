@@ -40,7 +40,6 @@ public interface Table<E> {
      */
     boolean insertColumn(int index);
 
-// Do not implement 
     /**
      * Inserts an element into the table.
      *
