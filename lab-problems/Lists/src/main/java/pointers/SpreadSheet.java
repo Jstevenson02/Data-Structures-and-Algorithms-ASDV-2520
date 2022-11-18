@@ -12,7 +12,6 @@ import pointers.Table;
  * The Node at ( 0,0 ) has its pointers: up --> null down --> Node at (1,0) left --> null right --?
  * Node at (0,1)
  *
- *
  *  * A Node at ( 2,3 ) has its pointers: up --> Node(1,3) down --> Node at (3,3) left --> Node(2,2)
  * right --? Node at ( 2,4)
  *
