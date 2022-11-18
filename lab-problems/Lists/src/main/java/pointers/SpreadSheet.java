@@ -1,6 +1,7 @@
 package pointers;
 
 /**
+<<<<<<< HEAD
  * The table is a collection of horizontal quadruple linked lists. The table
  * cannot be jagged.
  *
@@ -8,13 +9,22 @@ package pointers;
  * cell (0,0) Row 1 is a double linked list and the head of the list points at
  * cell (0,0). Row 2 is a double linked list and the head of the list points at
  * cell (1,0) And so on.
+=======
+
+>>>>>>> 710c7b7d5389246a45e649c4e0c1f395a9f6bbef
  *
  * The Node at ( 0,0 ) has its pointers: up --> null down --> Node at (1,0) left
  * --> null right --? Node at (0,1)
  *
  *
+<<<<<<< HEAD
  *  * A Node at ( 2,3 ) has its pointers: up --> Node(1,3) down --> Node at
  * (3,3) left --> Node(2,2) right --? Node at ( 2,4)
+=======
+ * left --> Node(2,2) right --? Node at ( 2,4)
+ *  * A Node at ( 2,3 ) has its pointers: up --> Node(1,3) down --> Node at (3,3) left --> Node(2,2)
+ * right --? Node at ( 2,4)
+>>>>>>> 710c7b7d5389246a45e649c4e0c1f395a9f6bbef
  *
  * And so on.
  *
