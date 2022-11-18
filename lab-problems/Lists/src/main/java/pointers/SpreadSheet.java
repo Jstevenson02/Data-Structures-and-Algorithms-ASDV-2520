@@ -36,7 +36,9 @@ public class SpreadSheet<E> implements Table<E>, Cloneable {
         Node<E> previousVert = null;
         for (int row = 0; row < rows; ++row) {
             for (int column = 0; column < columns; ++column) {
+                
                 Node<E> newNode = new Node();
+                
                 if (row == 0 && column == 0)//node at ( 0,0)//head node of 1st row
                 {
                     startNode = previousHorz = previousVert = newNode;
