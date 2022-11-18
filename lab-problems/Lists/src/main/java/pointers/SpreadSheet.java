@@ -1,20 +1,26 @@
 package pointers;
 
 /**
-
+ *
  *
  * The Node at ( 0,0 ) has its pointers: up --> null down --> Node at (1,0) left --> null right --?
  * Node at (0,1)
  *
  *
- * left --> Node(2,2) right --? Node at ( 2,4)
- *  * A Node at ( 2,3 ) has its pointers: up --> Node(1,3) down --> Node at (3,3) left --> Node(2,2)
- * right --? Node at ( 2,4)
+ * left --> Node(2,2) right --? Node at ( 2,4) * A Node at ( 2,3 ) has its pointers: up -->
+ * Node(1,3) down --> Node at (3,3) left --> Node(2,2) right --? Node at ( 2,4)
  *
  * And so on.
  *
  * @author ASDV2
  * @param <E>
+ */
+/**
+ * Creates a rows x columns table
+ *
+ * @param rows number of roes
+ * @param columns number of columns #thows IllegalArgumentException if rows/columns are not GT zero.
+ * @return true if the table was created successfully, false otherwise
  */
 public class SpreadSheet<E> implements Table<E>, Cloneable {
 
@@ -42,28 +48,35 @@ public class SpreadSheet<E> implements Table<E>, Cloneable {
      */
     public boolean createTable(int rows, int columns) {
 
-        Node<E> previousHorzNode = null;
-        Node<E> previousVertNode = null;
-        for (int horzIndex = 0; horzIndex < rows; ++horzIndex) {
-            for (int vertIndex = 0; vertIndex < columns; ++vertIndex) {
+        if (rows < 1 && columns < 1) {
+            throw new IllegalArgumentException();
+        }
+        this.rows = rows;
+        this.columns = columns;
+
+        Node<E> previousHorz = null;
+        Node<E> previousVert = null;
+        for (int i = 0; i < rows; ++i) {
+            for (int j = 0; j < columns; ++j) {
                 Node<E> newNode = new Node();
-                if (horzIndex == 0 && vertIndex == 0)//node at (0, 0) //head node of 1st row
+                if (i == 0 && j == 0)//node at ( 0,0)//head node of 1st row
                 {
-                    startNode = previousHorzNode = previousVertNode = newNode;
-                } else if (vertIndex == 0)// node at (vertIndex, 0) //head node of every row
+                    startNode = previousHorz = previousVert = newNode;
+                } else if (j == 0)// node at ( i,0)//head node of every row
                 {
-                    newNode.up = previousVertNode;
-                    previousVertNode.down = newNode;
-                    previousHorzNode = previousVertNode = newNode;
+                    newNode.up = previousVert;
+                    previousVert.down = newNode;
+                    previousHorz = previousVert = newNode;
                 } else//2nd to last node in every row
                 {
-                    newNode.left = previousHorzNode;
-                    previousHorzNode.right = newNode;
-                    if (horzIndex != 0)//middle rows connect up 
+                    newNode.left = previousHorz;
+                    previousHorz.right = newNode;
+                    if (i != 0)//middle rows connect up 
                     {
-                        newNode.up = previousHorzNode.up.right;
+                        newNode.up = previousHorz.up.right;
                     }
-                    previousHorzNode = previousHorzNode.right;
+
+                    previousHorz = previousHorz.right;
                 }
             }
         }
@@ -82,7 +95,7 @@ public class SpreadSheet<E> implements Table<E>, Cloneable {
 
     @Override
     public boolean insertCell(E e, int rowIndex, int columnIndex) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return false;
     }
 
     @Override
@@ -97,25 +110,36 @@ public class SpreadSheet<E> implements Table<E>, Cloneable {
 
     @Override
     public E getCell(int rowIndex, int columnIndex) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setCell(E e, int rowIndex, int columnIndex) {
-
         Node<E> headOfRow = this.startNode;
 
-        // headOfRow points to the Node at rowIndex
+        ///headOfRow points to the first cell of row rowIndex
         for (int i = 0; i < rowIndex; ++i) {
             headOfRow = headOfRow.down;
         }
 
         Node<E> p = headOfRow;
+        for (int i = 0; i < columnIndex; ++i) {
+            p = p.right;
+        }
 
-        for (int j = 0; j < columnIndex; ++j) {
+        return p.e;
+    }
+
+    @Override
+    public void setCell(E e, int rowIndex, int columnIndex) {
+        Node<E> headOfRow = this.startNode;
+
+        ///headOfRow points to the first cell of row rowIndex
+        for (int i = 0; i < rowIndex; ++i) {
+            headOfRow = headOfRow.down;
+        }
+
+        Node<E> p = headOfRow;
+        for (int i = 0; i < columnIndex; ++i) {
             p = p.right;
         }
         p.e = e;
+
     }
 
     @Override
@@ -161,7 +185,6 @@ public class SpreadSheet<E> implements Table<E>, Cloneable {
         for (int i = 0; i < this.rows; ++i) {
             p = headOfNextRow;
             for (int j = 0; j < this.columns; ++j) {
-
                 s += p.e + " ";
                 p = p.right;
             }
@@ -173,8 +196,12 @@ public class SpreadSheet<E> implements Table<E>, Cloneable {
 
     public static void main(String[] args) {
         SpreadSheet sp = new SpreadSheet<Integer>();
-        sp.createTable(4, 4);
-        sp.setCell(10, 1, 2);
+        sp.createTable(4, 5);
+
+        sp.setCell(50, 1, 0);
         System.out.println(sp);
+        System.out.println(sp.getCell(1, 0));
+        System.out.println(sp.getCell(1, 1));
+
     }
 }
