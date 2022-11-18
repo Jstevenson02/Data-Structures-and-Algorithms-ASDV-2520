@@ -1,26 +1,23 @@
 package pointers;
 
-import pointers.Table;
-
 /**
- * The table is a collection of horizontal quadruple linked lists. The table
- * cannot be jagged.
- *
- * For example, row 0 is a double linked list and the head of the list points at
- * cell (0,0) Row 1 is a double linked list and the head of the list points at
- * cell (0,0). Row 2 is a double linked list and the head of the list points at
- * cell (1,0) And so on.
+ * The table is a collection of horizontal quadruple linked lists.The table
+ * cannot be jagged. For example, row 0 is a double linked list and the head of
+ * the list points at cell (0,0) Row 1 is a double linked list and the head of
+ * the list points at cell (0,0). Row 2 is a double linked list and the head of
+ * the list points at cell (1,0) And so on.
  *
  * The Node at ( 0,0 ) has its pointers: up --> null down --> Node at (1,0) left
  * --> null right --? Node at (0,1)
  *
  *
- *  * A Node at ( 2,3 ) has its pointers: up --> Node(1,3) down --> Node at
- * (3,3) left --> Node(2,2) right --? Node at ( 2,4)
+ * A Node at ( 2,3 ) has its pointers: up --> Node(1,3) down --> Node at (3,3)
+ * left --> Node(2,2) right --? Node at ( 2,4)
  *
  * And so on.
  *
  * @author ASDV2
+ * @param <E>
  */
 public class SpreadSheet<E> implements Table<E>, Cloneable {
 
@@ -110,7 +107,20 @@ public class SpreadSheet<E> implements Table<E>, Cloneable {
 
     @Override
     public void setCell(E e, int rowIndex, int columnIndex) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        Node<E> headOfRow = this.startNode;
+
+        // headOfRow points to the Node at rowIndex
+        for (int i = 0; i < rowIndex; ++i) {
+            headOfRow = headOfRow.down;
+        }
+
+        Node<E> p = headOfRow;
+
+        for (int j = 0; j < columnIndex; ++j) {
+            p = p.right;
+        }
+        p.e = e;
     }
 
     @Override
@@ -154,35 +164,22 @@ public class SpreadSheet<E> implements Table<E>, Cloneable {
         Node<E> p = this.startNode;
         Node<E> headOfNextRow = this.startNode;
         for (int i = 0; i < this.rows; ++i) {
-            headOfNextRow = headOfNextRow.down;
+            p = headOfNextRow;
             for (int j = 0; j < this.columns; ++j) {
 
                 s += p.e + " ";
+                p = p.right;
             }
             s += "\n";
-            p = headOfNextRow;
+            headOfNextRow = headOfNextRow.down;
         }
         return s;
     }
 
     public static void main(String[] args) {
         SpreadSheet sp = new SpreadSheet<Integer>();
-        sp.createTable(4, 5);
+        sp.createTable(4, 4);
+        sp.setCell(10, 1, 2);
         System.out.println(sp);
-
-        // Go down from startNode
-        Node<Integer> p = sp.startNode;
-        p = p.right.right.right.right;
-        while (p != null) {
-            System.out.println(p.e);
-            p = p.left;
-        }
-        System.out.println("");
-        p = sp.startNode;
-        while (p != null) {
-            System.out.println(p.e);
-            p = p.down;
-        }
-
     }
 }

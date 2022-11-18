@@ -87,7 +87,9 @@ public class MP6Map<K, V> implements Map<K, V>, Cloneable {
             if (getClass() != obj.getClass()) {
                 return false;
             }
+
             final EntryASDV<?, ?> other = (EntryASDV<?, ?>) obj;
+
             if (!Objects.equals(this.key, other.key)) {
                 return false;
             }
@@ -102,7 +104,7 @@ public class MP6Map<K, V> implements Map<K, V>, Cloneable {
         @Override
         public int compareTo(K o) {
             if (getClass() != o.getClass()) {
-                throw new IllegalArgumentException("ellegal parameter " + o);
+                throw new IllegalArgumentException("illegal parameter " + o);
             }
             return ((Comparable) key).compareTo(o);
         }
