@@ -34,13 +34,13 @@ public class SpreadSheet<E> implements Table<E>, Cloneable {
 
         Node<E> previousHorz = null;
         Node<E> previousVert = null;
-        for (int i = 0; i < rows; ++i) {
-            for (int j = 0; j < columns; ++j) {
+        for (int row = 0; row < rows; ++row) {
+            for (int column = 0; column < columns; ++column) {
                 Node<E> newNode = new Node();
-                if (i == 0 && j == 0)//node at ( 0,0)//head node of 1st row
+                if (row == 0 && column == 0)//node at ( 0,0)//head node of 1st row
                 {
                     startNode = previousHorz = previousVert = newNode;
-                } else if (j == 0)// node at ( i,0)//head node of every row
+                } else if (column == 0)// node at ( i,0)//head node of every row
                 {
                     newNode.up = previousVert;
                     previousVert.down = newNode;
@@ -49,7 +49,7 @@ public class SpreadSheet<E> implements Table<E>, Cloneable {
                 {
                     newNode.left = previousHorz;
                     previousHorz.right = newNode;
-                    if (i != 0)//middle rows connect up 
+                    if (row != 0)//middle rows connect up 
                     {
                         newNode.up = previousHorz.up.right;
                     }
@@ -68,12 +68,21 @@ public class SpreadSheet<E> implements Table<E>, Cloneable {
 
     @Override
     public boolean insertColumn(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Node<E> headOfColumn = this.startNode;
+
+        for (int column = 0; column < columns; ++column) {
+            if (column == index) {
+                headOfColumn = headOfColumn.right;
+            }
+        }
+
+        return true;
     }
 
     @Override
     public boolean insertCell(E e, int rowIndex, int columnIndex) {
-        return false;
+        return true;
+
     }
 
     @Override
@@ -174,12 +183,31 @@ public class SpreadSheet<E> implements Table<E>, Cloneable {
 
     public static void main(String[] args) {
         SpreadSheet sp = new SpreadSheet<Integer>();
-        sp.createTable(4, 5);
+        sp.createTable(4, 4);
 
-        sp.setCell(50, 1, 0);
+        sp.setCell(0, 0, 0);
+        sp.setCell(0, 1, 0);
+        sp.setCell(0, 2, 0);
+        sp.setCell(0, 3, 0);
+        
+        sp.setCell(0, 0, 1);
+        sp.setCell(0, 1, 1);
+        sp.setCell(0, 2, 1);
+        sp.setCell(0, 3, 1);
+
+        sp.setCell(0, 0, 2);
+        sp.setCell(0, 1, 2);
+        sp.setCell(0, 2, 2);
+        sp.setCell(0, 3, 2);
+        
+        sp.setCell(0, 0, 3);
+        sp.setCell(0, 1, 3);
+        sp.setCell(0, 2, 3);
+        sp.setCell(0, 3, 3);
+
+
         System.out.println(sp);
-        System.out.println(sp.getCell(1, 0));
-        System.out.println(sp.getCell(1, 1));
+        sp.insertColumn(2);
 
     }
 }
