@@ -39,15 +39,13 @@ public class SpreadSheet<E> implements Table<E>, Cloneable {
 
         Node<E> previousHorz = null;
         Node<E> previousVert = null;
-        for (int row = 0; row < rows; ++row) {
-            for (int column = 0; column < columns; ++column) {
-
+        for (int i = 0; i < rows; ++i) {
+            for (int j = 0; j < columns; ++j) {
                 Node<E> newNode = new Node();
-
-                if (row == 0 && column == 0)//node at ( 0,0)//head node of 1st row
+                if (i == 0 && j == 0)//node at ( 0,0)//head node of 1st row
                 {
                     startNode = previousHorz = previousVert = newNode;
-                } else if (column == 0)// node at ( i,0)//head node of every row
+                } else if (j == 0)// node at ( i,0)//head node of every row
                 {
                     newNode.up = previousVert;
                     previousVert.down = newNode;
@@ -56,9 +54,11 @@ public class SpreadSheet<E> implements Table<E>, Cloneable {
                 {
                     newNode.left = previousHorz;
                     previousHorz.right = newNode;
-                    if (row != 0)//middle rows connect up 
+                    if (i != 0)//middle rows connect up 
                     {
                         newNode.up = previousHorz.up.right;
+                        previousHorz.up.right.down = newNode;
+
                     }
 
                     previousHorz = previousHorz.right;
@@ -71,29 +71,54 @@ public class SpreadSheet<E> implements Table<E>, Cloneable {
     @Override
     public boolean insertRow(int index) {
 
-        if (index >= rows) {
-            System.out.println("Index out Bounds");
+        if (index >= rows || index < 0) {
+            System.out.println("Index out Bounds!");
             return false;
         }
 
         Node<E> currentNode = new Node();
         currentNode = this.startNode;
 
-        for (int c = 0; c < index; c++) {
+        for (int r = 0; r < index; r++) {
             currentNode = currentNode.down;
         }
 
-        for (int r = 0; r < this.columns; r++) {
-            currentNode.e = null;
+        for (int c = 0; c < this.columns; c++) {
+
+            if (c == 0) {
+                Node<E> newNode = new Node();
+                newNode.e = null;
+
+                if (index - 1 >= 0) {
+                    currentNode.up.down = newNode;
+                }
+                if (index + 1 < rows) {
+                    currentNode.down.up = newNode;
+                }
+
+                newNode.up = currentNode.up;
+                newNode.down = currentNode;
+
+                currentNode = newNode;
+
+                if (index == 0) {
+                    startNode = currentNode;
+                }
+            }
+
+            currentNode.right = new Node();
+            currentNode.right.e = null;
+            currentNode.right.left = currentNode;
             currentNode = currentNode.right;
         }
+        rows++;
         return true;
     }
 
     @Override
     public boolean insertColumn(int index) {
 
-        if (index >= columns) {
+        if (index >= columns || index < 0) {
             System.out.println("Index out Bounds");
             return false;
         }
@@ -111,9 +136,36 @@ public class SpreadSheet<E> implements Table<E>, Cloneable {
                 rowNode = rowNode.right;
             }
 
+            Node<E> newNode = new Node();
+            newNode.e = null;
+
+            if (index - 1 >= 0) {
+                rowNode.left.right = newNode;
+            }
+            if (index + 1 < columns) {
+                rowNode.right.left = newNode;
+            }
+
+            newNode.left = rowNode.left;
+            newNode.right = rowNode;
+            rowNode.left = newNode;
+            
+            if (r > 0 && index == 0) {
+                newNode.up = newNode.right.up.left;
+                newNode.up.down = newNode;
+            }
+
+
+            rowNode = newNode;
+
+            if (index == 0 && r == 0) {
+                startNode = rowNode;
+            }
+
             rowNode.e = null;
             currentNode = currentNode.down;
         }
+        columns++;
         return true;
     }
 
@@ -264,6 +316,7 @@ public class SpreadSheet<E> implements Table<E>, Cloneable {
 
             currentNode = currentNode.down;
         }
+        System.out.println("Cleared!");
     }
 
     @Override
@@ -477,49 +530,89 @@ public class SpreadSheet<E> implements Table<E>, Cloneable {
         System.out.println(sp);
 
         System.out.println("\n" + "------------------------------Insert Column------------------------------------");
-        sp.insertColumn(2);
+        System.out.println("\n" + "------------------------------Before");
+        System.out.println(sp);
+        sp.insertColumn(1);
+        System.out.println("\n" + "------------------------------After");
+        System.out.println(sp);
 
         System.out.println("\n" + "------------------------------Insert Row------------------------------------");
-        sp.insertRow(2);
+        System.out.println("\n" + "------------------------------Before");
+        System.out.println(sp);
+        sp.insertRow(0);
+        System.out.println("\n" + "------------------------------After");
+        System.out.println(sp);
 
         System.out.println("\n" + "------------------------------Remove Cell col row ------------------------------------");
+        System.out.println("\n" + "------------------------------Before");
+        System.out.println(sp);
         sp.removeCell(2, 2);
+        System.out.println("\n" + "------------------------------After");
+        System.out.println(sp);
 
         System.out.println("\n" + "------------------------------Remove Cell E------------------------------------");
+        System.out.println("\n" + "------------------------------Before");
+        System.out.println(sp);
         sp.removeCell(5);
+        System.out.println("\n" + "------------------------------After");
+        System.out.println(sp);
 
         System.out.println("\n" + "------------------------------Insert Cell------------------------------------");
-        sp.insertCell(1, 2, 0);
+        System.out.println("\n" + "------------------------------Before");
+        System.out.println(sp);
         sp.insertCell(5, 2, 2);
+        System.out.println("\n" + "------------------------------After");
+        System.out.println(sp);
 
         System.out.println("\n" + "------------------------------Row To Array------------------------------------");
-
+        System.out.println("\n" + "------------------------------Before");
+        System.out.println(sp);
         Object[] ints = sp.rowToArray(2);
         for (int i = 0; i < ints.length; i++) {
             System.out.println(ints[i]);
         }
+        System.out.println("\n" + "------------------------------After");
+        System.out.println(sp);
 
         System.out.println("\n" + "------------------------------Column To Array------------------------------------");
+        System.out.println("\n" + "------------------------------Before");
+        System.out.println(sp);
         Object[] ints2 = sp.columnToArray(2);
         for (int i = 0; i < ints2.length; i++) {
             System.out.println(ints2[i]);
-        }
+        };
+        System.out.println("\n" + "------------------------------After");
+        System.out.println(sp);
 
         System.out.println("\n" + "------------------------------Move Column------------------------------------");
+
+        System.out.println("\n" + "------------------------------Before");
+        System.out.println(sp);
         sp.moveColumn(0, 3);
+        System.out.println("\n" + "------------------------------After");
         System.out.println(sp);
 
         System.out.println("\n" + "------------------------------Move Row------------------------------------");
+        System.out.println("\n" + "------------------------------Before");
+        System.out.println(sp);
         sp.moveRow(0, 3);
+        System.out.println("\n" + "------------------------------After");
+        System.out.println(sp);
 
-        System.out.println("\n" + "------------------------------Copy Sheet------------------------------------");
+        System.out.println("\n" + "------------------------------Clone Sheet------------------------------------");
+
+        System.out.println("\n" + "------------------------------Before");
+        System.out.println(sp);
         try {
             System.out.println(sp.clone());
         } catch (CloneNotSupportedException ex) {
             Logger.getLogger(SpreadSheet.class.getName()).log(Level.SEVERE, null, ex);
         }
+        System.out.println("\n" + "------------------------------After");
+        System.out.println(sp);
 
-//        sp.clear();
+        System.out.println("\n" + "------------------------------Clear Table------------------------------------");
+        sp.clear();
         System.out.println("\n" + "------------------------------Final Table------------------------------------");
         System.out.println(sp);
 
