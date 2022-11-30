@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>index.xhtml</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+body {color: #a9b7c6; background-color: #2b2b2b; font-family: monospace}
+pre {color: #a9b7c6; background-color: #2b2b2b; font-family: monospace}
+table {color: #888888; background-color: #313335; font-family: monospace}
+.ST1 {color: #505050; background-color: #323232}
+.ST2 {color: #bababa; background-color: #323232}
+.ST5 {color: #505050}
+.ST6 {color: #bababa}
+.ST10 {color: #e8bf6a; font-family: monospace; font-weight: bold}
+.ST0 {color: #e8bf6a; background-color: #323232}
+.ST9 {color: #e8bf6a}
+.ST3 {color: #a5c261; background-color: #323232}
+.ST7 {color: #a5c261}
+.expression-language {background-color: #232525}
+.ST11 {color: #6a8759}
+.ST12 {color: #6897bb}
+.ST4 {color: #287bde; background-color: #323232}
+.ST8 {color: #287bde}
+-->
+</style>
+</head>
+<body>
+<table width="100%"><tr><td align="center">C:\Users\jacob\Desktop\LabJuneauPage122Refined\web\index.xhtml</td></tr></table>
+<pre>
+<span class="ST0">&lt;</span><span class="ST0">html</span> <span class="ST2">xmlns</span><span class="ST2">=</span><span class="ST3">&quot;</span><span class="ST4">http://www.w3.org/1999/xhtml</span><span class="ST3">&quot;</span>
+      <span class="ST6">xmlns:f</span><span class="ST6">=</span><span class="ST7">&quot;</span><span class="ST8">http://xmlns.jcp.org/jsf/core</span><span class="ST7">&quot;</span>
+      <span class="ST6">xmlns:h</span><span class="ST6">=</span><span class="ST7">&quot;</span><span class="ST8">http://xmlns.jcp.org/jsf/html</span><span class="ST7">&quot;</span><span class="ST9">&gt;</span>
+    <span class="ST10">&lt;</span><span class="ST10">h:head</span><span class="ST10">&gt;</span>
+        <span class="ST9">&lt;</span><span class="ST9">meta</span> <span class="ST6">http-equiv</span><span class="ST6">=</span><span class="ST7">&quot;Content-Type&quot;</span> <span class="ST6">content</span><span class="ST6">=</span><span class="ST7">&quot;text/html; charset=UTF-8&quot;</span><span class="ST9">/&gt;</span>
+        <span class="ST9">&lt;</span><span class="ST9">title</span><span class="ST9">&gt;</span>Building Sophisticated JSF Views with Components<span class="ST9">&lt;/</span><span class="ST9">title</span><span class="ST9">&gt;</span>
+    <span class="ST10">&lt;/</span><span class="ST10">h:head</span><span class="ST10">&gt;</span>
+    <span class="ST10">&lt;</span><span class="ST10">h:body</span><span class="ST10">&gt;</span>
+        <span class="ST10">&lt;</span><span class="ST10">h:form</span> <span class="ST6">id</span><span class="ST6">=</span><span class="ST7">&quot;</span><span class="ST11">componentForm</span><span class="ST7">&quot;</span><span class="ST10">&gt;</span>
+            <span class="ST9">&lt;</span><span class="ST9">h1</span><span class="ST9">&gt;</span>JSF Components, Creating a Sophisticated Page<span class="ST9">&lt;/</span><span class="ST9">h1</span><span class="ST9">&gt;</span>
+            <span class="ST9">&lt;</span><span class="ST9">p</span><span class="ST9">&gt;</span>
+                The view for this page is made up entirely of JSF standard components.
+                <span class="ST9">&lt;</span><span class="ST9">br</span><span class="ST9">/&gt;</span>As you can see, there are many useful components bundled with JSF out of the box.
+                <span class="ST9">&lt;</span><span class="ST9">br</span><span class="ST9">/&gt;</span>
+            <span class="ST9">&lt;/</span><span class="ST9">p</span><span class="ST9">&gt;</span>
+            <span class="ST9">&lt;</span><span class="ST9">p</span><span class="ST9">&gt;</span>Book Recommendation: Java 7 Recipes
+                <span class="ST9">&lt;</span><span class="ST9">br</span><span class="ST9">/&gt;</span>
+                <span class="ST10">&lt;</span><span class="ST10">h:graphicImage</span>  <span class="ST6">style</span><span class="ST6">=</span><span class="ST7">&quot;</span> max-height: <span class="ST12">300px</span>; max-width: <span class="ST12">300px</span>;<span class="ST7">&quot;</span> <span class="ST6">library</span><span class="ST6">=</span><span class="ST7">&quot;images&quot;</span>  <span class="ST6">name</span><span class="ST6">=</span><span class="ST7">&quot;picture.png&quot;</span><span class="ST9">/</span><span class="ST10">&gt;</span>     
+                <span class="ST9">&lt;</span><span class="ST9">br</span><span class="ST9">/&gt;</span>
+
+                <span class="ST9">&lt;</span><span class="ST9">p</span><span class="ST9">&gt;</span>
+                    Use the following form to add an author to the list.
+                <span class="ST9">&lt;/</span><span class="ST9">p</span><span class="ST9">&gt;</span>
+                <span class="ST10">&lt;</span><span class="ST10">h:outputLabel</span> <span class="ST6">for</span><span class="ST6">=</span><span class="ST7">&quot;newAuthorFirst&quot;</span> <span class="ST6">value</span><span class="ST6">=</span><span class="ST7">&quot;New Author First Name: &quot;</span><span class="ST9">/</span><span class="ST10">&gt;</span>
+                <span class="ST10">&lt;</span><span class="ST10">h:inputText</span> <span class="ST6">id</span><span class="ST6">=</span><span class="ST7">&quot;</span><span class="ST11">newAuthorFirst</span><span class="ST7">&quot;</span> <span class="ST6">value</span><span class="ST6">=</span><span class="ST7">&quot;</span><span class="expression-language">#{</span><span class="expression-language">authorController</span><span class="expression-language">.</span><span class="expression-language">newAuthorFirst</span><span class="expression-language">}</span><span class="ST7">&quot;</span><span class="ST9">/</span><span class="ST10">&gt;</span>
+                <span class="ST9">&lt;</span><span class="ST9">br</span><span class="ST9">/&gt;</span>
+                <span class="ST10">&lt;</span><span class="ST10">h:outputLabel</span> <span class="ST6">for</span><span class="ST6">=</span><span class="ST7">&quot;newAuthorLast&quot;</span> <span class="ST6">value</span><span class="ST6">=</span><span class="ST7">&quot;New Author Last Name: &quot;</span><span class="ST9">/</span><span class="ST10">&gt;</span>
+                <span class="ST10">&lt;</span><span class="ST10">h:inputText</span> <span class="ST6">id</span><span class="ST6">=</span><span class="ST7">&quot;</span><span class="ST11">newAuthorLast</span><span class="ST7">&quot;</span> <span class="ST6">value</span><span class="ST6">=</span><span class="ST7">&quot;</span><span class="expression-language">#{</span><span class="expression-language">authorController</span><span class="expression-language">.</span><span class="expression-language">newAuthorLast</span><span class="expression-language">}</span><span class="ST7">&quot;</span><span class="ST9">/</span><span class="ST10">&gt;</span>
+                <span class="ST9">&lt;</span><span class="ST9">br</span><span class="ST9">/&gt;</span>
+                <span class="ST10">&lt;</span><span class="ST10">h:outputLabel</span> <span class="ST6">for</span><span class="ST6">=</span><span class="ST7">&quot;bio&quot;</span> <span class="ST6">value</span><span class="ST6">=</span><span class="ST7">&quot;Bio:&quot;</span><span class="ST9">/</span><span class="ST10">&gt;</span>
+                <span class="ST9">&lt;</span><span class="ST9">br</span><span class="ST9">/&gt;</span>
+                <span class="ST10">&lt;</span><span class="ST10">h:inputTextarea</span> <span class="ST6">id</span><span class="ST6">=</span><span class="ST7">&quot;</span><span class="ST11">bio</span><span class="ST7">&quot;</span> <span class="ST6">cols</span><span class="ST6">=</span><span class="ST7">&quot;20&quot;</span> <span class="ST6">rows</span><span class="ST6">=</span><span class="ST7">&quot;5&quot;</span>
+                                 <span class="ST6">value</span><span class="ST6">=</span><span class="ST7">&quot;</span><span class="expression-language">#{</span><span class="expression-language">authorController</span><span class="expression-language">.</span><span class="expression-language">bio</span><span class="expression-language">}</span><span class="ST7">&quot;</span><span class="ST9">/</span><span class="ST10">&gt;</span>
+                <span class="ST9">&lt;</span><span class="ST9">br</span><span class="ST9">/&gt;</span>
+                <span class="ST9">&lt;</span><span class="ST9">br</span><span class="ST9">/&gt;</span>
+                <span class="ST10">&lt;</span><span class="ST10">h:commandButton</span> <span class="ST6">id</span><span class="ST6">=</span><span class="ST7">&quot;</span><span class="ST11">addAuthor</span><span class="ST7">&quot;</span> <span class="ST6">action</span><span class="ST6">=</span><span class="ST7">&quot;</span><span class="expression-language">#{</span><span class="expression-language">authorController</span><span class="expression-language">.</span><span class="expression-language">addAuthor</span><span class="expression-language">}</span><span class="ST7">&quot;</span>
+                                 <span class="ST6">value</span><span class="ST6">=</span><span class="ST7">&quot;Add Author&quot;</span><span class="ST9">/</span><span class="ST10">&gt;</span>
+                <span class="ST9">&lt;</span><span class="ST9">br</span><span class="ST9">/&gt;</span>
+                <span class="ST9">&lt;</span><span class="ST9">br</span><span class="ST9">/&gt;</span>
+                <span class="ST10">&lt;</span><span class="ST10">h:dataTable</span> <span class="ST6">id</span><span class="ST6">=</span><span class="ST7">&quot;</span><span class="ST11">authorTable</span><span class="ST7">&quot;</span> <span class="ST6">value</span><span class="ST6">=</span><span class="ST7">&quot;</span><span class="expression-language">#{</span><span class="expression-language">authorController</span><span class="expression-language">.</span><span class="expression-language">authorList</span><span class="expression-language">}</span><span class="ST7">&quot;</span>
+                             <span class="ST6">var</span><span class="ST6">=</span><span class="ST7">&quot;author&quot;</span><span class="ST10">&gt;</span>
+                    <span class="ST10">&lt;</span><span class="ST10">f:facet</span> <span class="ST6">name</span><span class="ST6">=</span><span class="ST7">&quot;header&quot;</span><span class="ST10">&gt;</span>
+                        Java 7 Recipes Authors
+                    <span class="ST10">&lt;/</span><span class="ST10">f:facet</span><span class="ST10">&gt;</span>
+                    <span class="ST10">&lt;</span><span class="ST10">h:column</span><span class="ST10">&gt;</span>
+                        <span class="ST10">&lt;</span><span class="ST10">h:outputText</span> <span class="ST6">id</span><span class="ST6">=</span><span class="ST7">&quot;</span><span class="ST11">authorName</span><span class="ST7">&quot;</span> <span class="ST6">value</span><span class="ST6">=</span><span class="ST7">&quot;</span><span class="expression-language">#{</span><span class="expression-language">author</span><span class="expression-language">.</span><span class="expression-language">first</span><span class="expression-language">}</span> <span class="expression-language">#{</span><span class="expression-language">author</span><span class="expression-language">.</span><span class="expression-language">last</span><span class="expression-language">}</span><span class="ST7">&quot;</span><span class="ST9">/</span><span class="ST10">&gt;</span>
+                    <span class="ST10">&lt;/</span><span class="ST10">h:column</span><span class="ST10">&gt;</span>
+                    
+                <span class="ST10">&lt;/</span><span class="ST10">h:dataTable</span><span class="ST10">&gt;</span>
+                
+                <span class="ST10">&lt;</span><span class="ST10">h:message</span> <span class="ST6">for</span><span class="ST6">=</span><span class="ST7">&quot;addAuthor&quot;</span>  <span class="ST9">/</span><span class="ST10">&gt;</span>
+                <span class="ST9">&lt;</span><span class="ST9">br</span><span class="ST9">/&gt;</span>
+                <span class="ST9">&lt;</span><span class="ST9">br</span><span class="ST9">/&gt;</span>
+            <span class="ST9">&lt;/</span><span class="ST9">p</span><span class="ST9">&gt;</span>
+        <span class="ST10">&lt;/</span><span class="ST10">h:form</span><span class="ST10">&gt;</span>
+    <span class="ST10">&lt;/</span><span class="ST10">h:body</span><span class="ST10">&gt;</span>
+<span class="ST9">&lt;/</span><span class="ST9">html</span><span class="ST9">&gt;</span>
+
+</pre></body>
+</html>

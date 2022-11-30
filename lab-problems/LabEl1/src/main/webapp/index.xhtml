@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+    <h:head>
+        <title>Person</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <br />
+            <h:outputText value="#{person.firstName}" />
+            <br />
+            <h:outputText value="#{person.lastName}" />
+            <br />
+            <h:outputText value="#{person.birth.birthday}" />
+            <br />
+            <h:outputText value="#{person.birth.birthplace}" />
+            <br />
+            <h:outputText value="#{person.twin.twin}" />
+            <p>ALTERNATIVE NOTATION TO REFERENCE BEANS</p>
+            #{person['firstName']}
+            #{person['lastName']}
+            #{person['birth']['birthday']}
+            #{person['birth']['birthplace']}
+            <br/>
+            birthplace
+            <h:inputText value="#{person['birth']['birthplace']}" />
+            <br/>
+            <h:inputText value="#{person['birth']['birthplace']}" />
+            <br/>
+            <h:inputText value="#{person.birth.birthplace}" />
+            <br />
+            <h:outputText value="#{person.birth.gender.male}" />
+            <br/> 
+            <h:outputText value="#{person.education}" />
+            <br/> 
+            #{person.siblingsNames[0]}
+            #{person.siblingsNames[1]}
+            #{person.siblingsNames[2]}
+            #{person.siblingsNames[3]}
+            <br/> 
+            <c:forEach var="brothersNsisters" items="#{person.siblingsNames}">
+                <i>#{brothersNsisters}</i>
+            </c:forEach>
+            <br/> 
+            <ui:repeat var="brothersNsisters" value="#{person.siblingsNames}">
+                <i>#{brothersNsisters}</i>
+            </ui:repeat>
+            <br/>
+            #{person.siblingsFacts["Paul"]}
+            #{person.siblingsFacts.Mary}
+            #{person.siblingsFacts.Alexander}
+            #{person.siblingsFacts["Anna"]}
+            <br/> 
+            <c:forEach var="siblings" items="#{person.siblingsList}">
+                <i>#{siblings}</i>
+            </c:forEach>
+            <br/> 
+            <c:forEach begin="0" end="${person.siblingsList.size() - 1}" var="i">
+                <i>#{person.siblingsList[i]}</i>
+            </c:forEach>
+            <br/> 
+            <h:outputText value="#{person.hobbiesList}" />
+            <br />
+             <c:forEach var="hobbies" items="#{person.hobbiesList}">
+                <i>#{hobbies}</i>
+            </c:forEach>
+        </h:form>
+    </h:body>
+</html>
+

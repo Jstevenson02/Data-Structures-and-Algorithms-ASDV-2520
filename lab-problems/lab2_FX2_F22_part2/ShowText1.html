@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ShowText1.java</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+body {color: #a9b7c6; background-color: #2b2b2b; font-family: monospace}
+pre {color: #a9b7c6; background-color: #2b2b2b; font-family: monospace}
+table {color: #888888; background-color: #313335; font-family: monospace}
+.comment {color: #808080}
+.whitespace {color: #505050}
+.ST3 {color: #9876aa; font-family: monospace; font-style: italic}
+.ST4 {color: #ffc66d; font-family: monospace; font-style: italic}
+.number {color: #6897bb}
+.string {color: #6a8759}
+.ST1 {color: #ffc66d}
+.ST0 {color: #287bde}
+.ST2 {font-family: monospace; font-style: italic}
+.literal {color: #cc7832}
+-->
+</style>
+</head>
+<body>
+<table width="100%"><tr><td align="center">C:\Users\jacob\Documents\NetBeansProjects\FX2\src\events\ShowText1.java</td></tr></table>
+<pre>
+<span class="comment">/*</span>
+<span class="comment"> * Click </span><span class="ST0">nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt</span><span class="comment"> to change this license</span>
+<span class="comment"> * Click </span><span class="ST0">nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java</span><span class="comment"> to edit this template</span>
+<span class="comment"> */</span>
+<span class="literal">package</span> events;
+
+<span class="literal">import</span> javafx.application.Application;
+<span class="literal">import</span> javafx.geometry.Insets;
+<span class="literal">import</span> javafx.scene.Scene;
+<span class="literal">import</span> javafx.scene.layout.Pane;
+<span class="literal">import</span> javafx.scene.paint.Color;
+<span class="literal">import</span> javafx.scene.text.Font;
+<span class="literal">import</span> javafx.scene.text.FontPosture;
+<span class="literal">import</span> javafx.scene.text.FontWeight;
+<span class="literal">import</span> javafx.scene.text.Text;
+<span class="literal">import</span> javafx.stage.Stage;
+
+<span class="literal">public</span> <span class="literal">class</span> ShowText1 <span class="literal">extends</span> Application {
+
+    @Override
+    <span class="literal">public</span> <span class="literal">void</span> <span class="ST1">start</span>(Stage primaryStage) {
+        Pane pane = <span class="literal">new</span> Pane();
+        pane.setPadding(<span class="literal">new</span> Insets(<span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>));
+
+        Text text1 = <span class="literal">new</span> Text(<span class="number">4</span><span class="number">0</span>, <span class="number">4</span><span class="number">0</span>, <span class="string">&quot;</span><span class="string">Java Programming is bold and beautiful!</span><span class="string">&quot;</span>);
+        text1.setFont(Font.<span class="ST2">font</span>(<span class="string">&quot;</span><span class="string">Impact</span><span class="string">&quot;</span>, FontWeight.<span class="ST3">BOLD</span>, FontPosture.<span class="ST3">ITALIC</span>, <span class="number">3</span><span class="number">6</span>));
+        pane.getChildren().add(text1);
+
+        Text text2 = <span class="literal">new</span> Text(<span class="number">6</span><span class="number">0</span>, <span class="number">6</span><span class="number">0</span>, <span class="string">&quot;</span><span class="string">Java Programming is fun</span><span class="literal">\n</span><span class="string">Challenging!</span><span class="string">&quot;</span>);
+        pane.getChildren().add(text2);
+
+        Text text3 = <span class="literal">new</span> Text(<span class="number">1</span><span class="number">0</span>, <span class="number">1</span><span class="number">00</span>, <span class="string">&quot;</span><span class="string">C# Programming is not as beautiful</span><span class="string">&quot;</span> + <span class="string">&quot;</span><span class="string"> as Java programming!</span><span class="literal">\n</span><span class="string">Try it!</span><span class="string">&quot;</span>);
+        text3.setFill(Color.<span class="ST3">RED</span>);
+        text3.setUnderline(<span class="literal">t</span><span class="literal">rue</span>);
+        text3.setStrikethrough(<span class="literal">t</span><span class="literal">rue</span>);
+        text3.rotateProperty().add(<span class="number">9</span><span class="number">0</span>);
+        pane.getChildren().add(text3);
+        
+        Scene scene = <span class="literal">new</span> Scene(pane);
+        primaryStage.setTitle(<span class="string">&quot;</span><span class="string">Show Text</span><span class="string">&quot;</span>);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
+    }
+
+    <span class="literal">public</span> <span class="literal">static</span> <span class="literal">void</span> <span class="ST4">main</span>(String[] args) {
+        <span class="ST2">launch</span>(args);
+    }
+}
+
+</pre></body>
+</html>

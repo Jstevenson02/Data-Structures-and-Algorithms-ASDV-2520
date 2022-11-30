@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>AuthorController.java</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+body {color: #000000; background-color: #ffffff; font-family: Microsoft JhengHei; font-weight: bold}
+pre {color: #000000; background-color: #ffffff; font-family: Microsoft JhengHei; font-weight: bold}
+table {color: #000000; background-color: #e9e8e2; font-family: Microsoft JhengHei; font-weight: bold}
+.ST3 {color: #098618; font-family: Microsoft JhengHei; font-weight: bold; font-style: italic}
+.string {color: #99006b}
+.ST5 {font-family: Microsoft JhengHei; font-weight: bold; font-style: italic}
+.ST2 {color: #098618}
+.ST4 {color: #a06001}
+.comment {color: #737373}
+.ST0 {color: #000099}
+.ST1 {color: #0000cc}
+-->
+</style>
+</head>
+<body>
+<table width="100%"><tr><td align="center">C:\Users\jacob\Documents\NetBeansProjects\Lab5\src\java\utilities\AuthorController.java</td></tr></table>
+<pre>
+<span class="ST0">import</span> java.io.Serializable;
+<span class="ST0">import</span> java.util.ArrayList;
+<span class="ST0">import</span> java.util.List;
+<span class="ST0">import</span> javax.enterprise.context.SessionScoped;
+<span class="ST0">import</span> javax.faces.application.FacesMessage;
+<span class="ST0">import</span> javax.faces.context.FacesContext;
+<span class="ST0">import</span> javax.inject.Named;
+ 
+<span class="comment">/**</span>
+<span class="comment"> * </span><span class="ST1">@author</span> <span class="comment">juneau</span>
+ <span class="comment">*/</span>
+
+@Named(value = <span class="string">&quot;</span><span class="string">authorController</span><span class="string">&quot;</span>)
+@SessionScoped
+<span class="ST0">public</span> <span class="ST0">class</span> AuthorController <span class="ST0">implements</span> Serializable {
+ 
+    <span class="ST0">private</span> String <span class="ST2">newAuthorFirst</span>;
+    <span class="ST0">private</span> String <span class="ST2">newAuthorLast</span>;
+    <span class="ST0">private</span> String <span class="ST2">bio</span>;
+    <span class="ST0">private</span> List&lt;Author&gt; <span class="ST2">authorList</span>;
+     
+    <span class="comment">/**</span>
+<span class="comment">     * </span><span class="comment">Creates</span> <span class="comment">a</span> <span class="comment">new</span> <span class="comment">instance</span> <span class="comment">of</span> <span class="comment">AuthorController</span>
+     <span class="comment">*/</span>
+    <span class="ST0">public</span> AuthorController() {
+        populateAuthorList();
+    }
+     
+    <span class="ST0">private</span> <span class="ST0">void</span> populateAuthorList(){
+        System.<span class="ST3">out</span>.println(<span class="string">&quot;</span><span class="string">initializng authors</span><span class="string">&quot;</span>);
+        <span class="ST2">authorList</span> = <span class="ST0">new</span> ArrayList&lt;&gt;();
+        <span class="ST2">authorList</span>.add(<span class="ST0">new</span> Author(<span class="string">&quot;</span><span class="string">Josh</span><span class="string">&quot;</span>, <span class="string">&quot;</span><span class="string">Juneau</span><span class="string">&quot;</span>, <span class="ST0">n</span><span class="ST0">ull</span>));
+        <span class="ST2">authorList</span>.add(<span class="ST0">new</span> Author(<span class="string">&quot;</span><span class="string">Carl</span><span class="string">&quot;</span>, <span class="string">&quot;</span><span class="string">Dea</span><span class="string">&quot;</span>, <span class="ST0">n</span><span class="ST0">ull</span>));
+        <span class="ST2">authorList</span>.add(<span class="ST0">new</span> Author(<span class="string">&quot;</span><span class="string">Mark</span><span class="string">&quot;</span>, <span class="string">&quot;</span><span class="string">Beaty</span><span class="string">&quot;</span>, <span class="ST0">n</span><span class="ST0">ull</span>));
+        <span class="ST2">authorList</span>.add(<span class="ST0">new</span> Author(<span class="string">&quot;</span><span class="string">John</span><span class="string">&quot;</span>, <span class="string">&quot;</span><span class="string">O&#39;Conner</span><span class="string">&quot;</span>, <span class="ST0">n</span><span class="ST0">ull</span>));
+        <span class="ST2">authorList</span>.add(<span class="ST0">new</span> Author(<span class="string">&quot;</span><span class="string">Freddy</span><span class="string">&quot;</span>, <span class="string">&quot;</span><span class="string">Guime</span><span class="string">&quot;</span>, <span class="ST0">n</span><span class="ST0">ull</span>));
+         
+    }
+     
+    <span class="ST0">public</span> <span class="ST0">void</span> addAuthor() {
+        getAuthorList().add(
+                <span class="ST0">new</span> Author(<span class="ST0">t</span><span class="ST0">his</span>.getNewAuthorFirst(),
+                           <span class="ST0">t</span><span class="ST0">his</span>.getNewAuthorLast(),
+                           <span class="ST0">t</span><span class="ST0">his</span>.getBio()));
+        clickAction();
+    }
+ 
+
+    <span class="comment">/**</span>
+<span class="comment">     * </span><span class="ST1">@return</span> <span class="comment">the</span> <span class="comment">authorList</span>
+     <span class="comment">*/</span>
+    <span class="ST0">public</span> List&lt;Author&gt; getAuthorList() {
+        <span class="ST0">return</span> <span class="ST2">authorList</span>;
+    }
+ 
+    <span class="comment">/**</span>
+<span class="comment">     * </span><span class="ST1">@param</span> authorList <span class="comment">the</span> <span class="comment">authorList</span> <span class="comment">to</span> <span class="comment">set</span>
+     <span class="comment">*/</span>
+    <span class="ST0">public</span> <span class="ST0">void</span> setAuthorList(List&lt;Author&gt; <span class="ST4">authorList</span>) {
+        <span class="ST0">this</span>.<span class="ST2">authorList</span> = <span class="ST4">authorList</span>;
+    }
+ 
+    <span class="comment">/**</span>
+<span class="comment">     * </span><span class="ST1">@return</span> <span class="comment">the</span> <span class="comment">newAuthorFirst</span>
+     <span class="comment">*/</span>
+    <span class="ST0">public</span> String getNewAuthorFirst() {
+        <span class="ST0">return</span> <span class="ST2">newAuthorFirst</span>;
+    }
+ 
+    <span class="comment">/**</span>
+<span class="comment">     * </span><span class="ST1">@param</span> newAuthorFirst <span class="comment">the</span> <span class="comment">newAuthorFirst</span> <span class="comment">to</span> <span class="comment">set</span>
+     <span class="comment">*/</span>
+    <span class="ST0">public</span> <span class="ST0">void</span> setNewAuthorFirst(String <span class="ST4">newAuthorFirst</span>) {
+        <span class="ST0">this</span>.<span class="ST2">newAuthorFirst</span> = <span class="ST4">newAuthorFirst</span>;
+    }
+ 
+    <span class="comment">/**</span>
+<span class="comment">     * </span><span class="ST1">@return</span> <span class="comment">the</span> <span class="comment">newAuthorLast</span>
+     <span class="comment">*/</span>
+    <span class="ST0">public</span> String getNewAuthorLast() {
+        <span class="ST0">return</span> <span class="ST2">newAuthorLast</span>;
+    }
+ 
+    <span class="comment">/**</span>
+<span class="comment">     * </span><span class="ST1">@param</span> newAuthorLast <span class="comment">the</span> <span class="comment">newAuthorLast</span> <span class="comment">to</span> <span class="comment">set</span>
+     <span class="comment">*/</span>
+    <span class="ST0">public</span> <span class="ST0">void</span> setNewAuthorLast(String <span class="ST4">newAuthorLast</span>) {
+        <span class="ST0">this</span>.<span class="ST2">newAuthorLast</span> = <span class="ST4">newAuthorLast</span>;
+    }
+ 
+    <span class="comment">/**</span>
+<span class="comment">     * </span><span class="ST1">@return</span> <span class="comment">the</span> <span class="comment">bio</span>
+     <span class="comment">*/</span>
+    <span class="ST0">public</span> String getBio() {
+        <span class="ST0">return</span> <span class="ST2">bio</span>;
+    }
+    <span class="comment">/**</span>
+<span class="comment">     * </span><span class="ST1">@param</span> bio <span class="comment">the</span> <span class="comment">bio</span> <span class="comment">to</span> <span class="comment">set</span>
+     <span class="comment">*/</span>
+    <span class="ST0">public</span> <span class="ST0">void</span> setBio(String <span class="ST4">bio</span>) {
+        <span class="ST0">this</span>.<span class="ST2">bio</span> = <span class="ST4">bio</span>;
+    }
+    
+    <span class="ST0">public</span> <span class="ST0">void</span> clickAction(){
+        FacesContext.<span class="ST5">getCurrentInstance</span>().addMessage(<span class="ST0">n</span><span class="ST0">ull</span>, <span class="ST0">new</span> FacesMessage(<span class="string">&quot;</span><span class="string">Clicked button</span><span class="string">&quot;</span>));
+    }
+}
+</pre></body>
+</html>

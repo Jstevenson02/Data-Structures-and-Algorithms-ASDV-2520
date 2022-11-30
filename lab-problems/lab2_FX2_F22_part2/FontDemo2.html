@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>FontDemo2.java</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+body {color: #a9b7c6; background-color: #2b2b2b; font-family: monospace}
+pre {color: #a9b7c6; background-color: #2b2b2b; font-family: monospace}
+table {color: #888888; background-color: #313335; font-family: monospace}
+.comment {color: #808080}
+.whitespace {color: #505050}
+.ST2 {color: #9876aa; font-family: monospace; font-style: italic}
+.ST4 {color: #ffc66d; font-family: monospace; font-style: italic}
+.string {color: #6a8759}
+.number {color: #6897bb}
+.ST1 {color: #ffc66d}
+.ST0 {color: #287bde}
+.ST3 {font-family: monospace; font-style: italic}
+.literal {color: #cc7832}
+-->
+</style>
+</head>
+<body>
+<table width="100%"><tr><td align="center">C:\Users\jacob\Documents\NetBeansProjects\FX2\src\events\FontDemo2.java</td></tr></table>
+<pre>
+<span class="comment">/*</span>
+<span class="comment"> * Click </span><span class="ST0">nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt</span><span class="comment"> to change this license</span>
+<span class="comment"> * Click </span><span class="ST0">nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java</span><span class="comment"> to edit this template</span>
+<span class="comment"> */</span>
+<span class="literal">package</span> events;
+
+<span class="literal">import</span> javafx.application.Application;
+<span class="literal">import</span> javafx.scene.Scene;
+<span class="literal">import</span> javafx.scene.control.Label;
+<span class="literal">import</span> javafx.scene.layout.Pane;
+<span class="literal">import</span> javafx.scene.layout.StackPane;
+<span class="literal">import</span> javafx.scene.paint.Color;
+<span class="literal">import</span> javafx.scene.shape.Circle;
+<span class="literal">import</span> javafx.scene.text.Font;
+<span class="literal">import</span> javafx.scene.text.FontPosture;
+<span class="literal">import</span> javafx.scene.text.FontWeight;
+<span class="literal">import</span> javafx.stage.Stage;
+
+<span class="literal">public</span> <span class="literal">class</span> FontDemo2 <span class="literal">extends</span> Application {
+
+    @Override
+    <span class="literal">public</span> <span class="literal">void</span> <span class="ST1">start</span>(Stage primaryStage) {
+        Pane pane = <span class="literal">new</span> StackPane();
+        Scene scene = <span class="literal">new</span> Scene(pane);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle(<span class="string">&quot;</span><span class="string">FontDemo1</span><span class="string">&quot;</span>);
+
+        Circle circle = <span class="literal">new</span> Circle();
+        circle.setRadius(<span class="number">3</span><span class="number">00</span>);
+        circle.setStroke(Color.<span class="ST2">BLACK</span>);
+        circle.setFill(Color.<span class="ST2">GRAY</span>);
+        pane.getChildren().add(circle);
+
+        Label label = <span class="literal">new</span> Label(<span class="string">&quot;</span><span class="string">JavaFX</span><span class="string">&quot;</span>);
+        label.setRotate(<span class="number">9</span><span class="number">0</span>);
+        label.setFont(Font.<span class="ST3">font</span>(<span class="string">&quot;</span><span class="string">Comic Sans MS</span><span class="string">&quot;</span>, FontWeight.<span class="ST2">BOLD</span>, FontPosture.<span class="ST2">ITALIC</span>, <span class="number">9</span><span class="number">6</span>));
+        label.setTextFill(Color.<span class="ST2">YELLOW</span>);
+        pane.getChildren().add(label);
+        primaryStage.show();
+    }
+    <span class="literal">public</span> <span class="literal">static</span> <span class="literal">void</span> <span class="ST4">main</span>(String[] args) {
+        <span class="ST3">launch</span>(args);
+    }
+}
+
+</pre></body>
+</html>

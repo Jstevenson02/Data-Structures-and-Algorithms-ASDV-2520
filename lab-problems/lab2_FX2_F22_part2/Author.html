@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Author.java</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+body {color: #a9b7c6; background-color: #2b2b2b; font-family: monospace}
+pre {color: #a9b7c6; background-color: #2b2b2b; font-family: monospace}
+table {color: #888888; background-color: #313335; font-family: monospace}
+.ST1 {color: #808080; font-family: monospace; font-weight: bold}
+.ST3 {color: #8a653b}
+.whitespace {color: #505050}
+.comment {color: #808080}
+.ST0 {color: #9876aa}
+.ST2 {color: #ffc66d}
+.literal {color: #cc7832}
+-->
+</style>
+</head>
+<body>
+<table width="100%"><tr><td align="center">C:\Users\jacob\Desktop\LabJuneauPage122Refined\src\java\asdv\slcc\beans\Author.java</td></tr></table>
+<pre>
+<span class="literal">package</span> asdv.slcc.beans;
+
+
+
+<span class="literal">public</span> <span class="literal">class</span> Author <span class="literal">implements</span> java.io.Serializable {
+    <span class="literal">private</span> String <span class="ST0">first</span>;
+    <span class="literal">private</span> String <span class="ST0">last</span>;
+    <span class="literal">private</span> String <span class="ST0">bio</span>;
+     
+    <span class="literal">public</span> Author(){
+        <span class="literal">this</span>.<span class="ST0">first</span> = <span class="literal">null</span>;
+        <span class="literal">this</span>.<span class="ST0">last</span> = <span class="literal">null</span>;
+        <span class="literal">this</span>.<span class="ST0">bio</span> = <span class="literal">null</span>;
+    }
+ 
+    <span class="literal">public</span> Author(String first, String last, String bio){
+        <span class="literal">this</span>.<span class="ST0">first</span> = first;
+        <span class="literal">this</span>.<span class="ST0">last</span> = last;
+        <span class="literal">this</span>.<span class="ST0">bio</span> = bio;
+    }
+    <span class="comment">/**</span>
+<span class="comment">     * </span><span class="ST1">@return</span> <span class="comment">the</span> <span class="comment">first</span>
+     <span class="comment">*/</span>
+    <span class="literal">public</span> String <span class="ST2">getFirst</span>() {
+        <span class="literal">return</span> <span class="ST0">first</span>;
+    }
+ 
+    <span class="comment">/**</span>
+<span class="comment">     * </span><span class="ST1">@param</span> <span class="ST3">first</span> <span class="comment">the</span> <span class="comment">first</span> <span class="comment">to</span> <span class="comment">set</span>
+     <span class="comment">*/</span>
+    <span class="literal">public</span> <span class="literal">void</span> <span class="ST2">setFirst</span>(String first) {
+        <span class="literal">this</span>.<span class="ST0">first</span> = first;
+    }
+    <span class="comment">/**</span>
+<span class="comment">     * </span><span class="ST1">@return</span> <span class="comment">the</span> <span class="comment">last</span>
+     <span class="comment">*/</span>
+    <span class="literal">public</span> String <span class="ST2">getLast</span>() {
+        <span class="literal">return</span> <span class="ST0">last</span>;
+    }
+ 
+    <span class="comment">/**</span>
+<span class="comment">     * </span><span class="ST1">@param</span> <span class="ST3">last</span> <span class="comment">the</span> <span class="comment">last</span> <span class="comment">to</span> <span class="comment">set</span>
+     <span class="comment">*/</span>
+    <span class="literal">public</span> <span class="literal">void</span> <span class="ST2">setLast</span>(String last) {
+        <span class="literal">this</span>.<span class="ST0">last</span> = last;
+    }
+ 
+    <span class="comment">/**</span>
+<span class="comment">     * </span><span class="ST1">@return</span> <span class="comment">the</span> <span class="comment">bio</span>
+     <span class="comment">*/</span>
+    <span class="literal">public</span> String <span class="ST2">getBio</span>() {
+        <span class="literal">return</span> <span class="ST0">bio</span>; 
+    }
+ 
+    <span class="comment">/**</span>
+<span class="comment">     * </span><span class="ST1">@param</span> <span class="ST3">bio</span> <span class="comment">the</span> <span class="comment">bio</span> <span class="comment">to</span> <span class="comment">set</span>
+     <span class="comment">*/</span>
+    <span class="literal">public</span> <span class="literal">void</span> <span class="ST2">setBio</span>(String bio) {
+        <span class="literal">this</span>.<span class="ST0">bio</span> = bio;
+    }
+}
+</pre></body>
+</html>

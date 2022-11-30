@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+    <h:head>
+        <title>Person</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <br />
+            <h:outputText value="#{person.firstName}" />
+            <br />
+            <h:outputText value="#{person.lastName}" />
+            <br />
+            <h:outputText value="#{person.birth.birthday}" />
+            <br />
+            <h:outputText value="#{person.birth.birthplace}" />
+            <br />
+            <h:outputText value="#{person.twin.twin}" />
+            <p>ALTERNATIVE NOTATION TO REFERENCE BEANS</p>
+            #{person['firstName']}
+            #{person['lastName']}
+            #{person['birth']['birthday']}
+            #{person['birth']['birthplace']}
+            <br/>
+            birthplace
+            <h:inputText value="#{person['birth']['birthplace']}" />
+            <br/>
+            <h:inputText value="#{person['birth']['birthplace']}" />
+            <br/>
+
+            <br /><br />            
+            Testing methods of bean Person
+            <br />
+            #{person.printFirstAndLastName()}
+            #{person.firstAndLastName()}
+            #{person.printText("Hello friend!")}
+            #{person.printText(person.firstName)}
+            <br /><br />
+            Testing the conditional operator
+            <br />
+            #{person.firstName.equals("John") ? "The name is John" : "not John" }
+            #{person.firstName.equals("Joe") ? "The name is Joe" : "Not Joe"}
+            #{person.birth.birthday.compareTo(person.birth.birthday) == 0 ? 888 : -111}
+
+            <br /><br />
+            Use of the conditional operator to Eliminate the comma from last element in the loop.]
+            <br />
+
+            <c:forEach begin="0" end="${fn:length(person.siblingsList) - 1}" var="i" varStatus="siblingsStatus">
+                <i>#{person.siblingsList[i]}</i>
+                #{siblingsStatus.last ? '' : ','}
+            </c:forEach>
+
+            <br /><br />
+            #{x = 20}
+            #{y = x + 20}
+            #{z = (y + 20)  * 2}
+            #{bool1 = true}
+            #{bool2 = !bool1}
+            #{s = "Paul"}
+            #{s2 = firstName = "Paul"}
+            #{person.firstName}
+            #{x}
+            #{y}
+            #{z}
+            #{bool2}
+            <br /><br />
+
+            Working with the concatenation operator += WITH quotes
+            #{x="3"}
+            #{y='4'}
+            #{x += y}
+            #{'0' += '0' += 1 += 1}
+            <br />
+
+            <br /><br />
+            Working with the  concatenation operator .concat 
+            always a var WITH quotes to use it
+            #{ x = '3'}
+            #{x.concat(4)}
+            #{'0'.concat(0).concat('1') += '1'.concat("7")}
+
+            <br /><br />
+            Working with the SEMICOLON operator
+            #{x = 5; y = 3; z = x + y}
+            #{x = 5.2; y = 3.6; z = x + y}
+            <br />
+            #{x = 5.2; y = 3.6; z = x += y}
+
+            <br /><br />
+            Working with Lambda expressions
+            <br />
+            direct invocations
+            <p>#{( (x) -> x + 1)(3)}</p>
+            #{((x,y,z) -> x - y * z)(1,7,3)}
+            <br />
+            #{q = (x) -> x + 1; q(3)}
+            <br />
+            #{min =  (x, y) -> x le y? x : y}
+            <br />
+            #{min(1, 2)}
+            <br />
+            PASSING lambda expression as arguments to 
+            methods in beans and calling them from beans
+            #{person.firstLambdaAction(max = (x, y) -> x ge y? x : y)}
+            <br />
+            #{person.min3LambdaAction(
+              min3 = (x, y, z) -> 
+              x lt y ? x lt z ? x : z
+              :
+              y lt z ? y : z) }
+              )}
+        </h:form>
+    </h:body>
+</html>
+

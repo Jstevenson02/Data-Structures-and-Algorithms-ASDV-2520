@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Line2.java</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+body {color: #a9b7c6; background-color: #2b2b2b; font-family: monospace}
+pre {color: #a9b7c6; background-color: #2b2b2b; font-family: monospace}
+table {color: #888888; background-color: #313335; font-family: monospace}
+.comment {color: #808080}
+.whitespace {color: #505050}
+.ST2 {color: #ffc66d; font-family: monospace; font-style: italic}
+.ST4 {color: #9876aa; font-family: monospace; font-style: italic}
+.number {color: #6897bb}
+.string {color: #6a8759}
+.ST1 {color: #ffc66d}
+.ST0 {color: #287bde}
+.ST3 {font-family: monospace; font-style: italic}
+.literal {color: #cc7832}
+-->
+</style>
+</head>
+<body>
+<table width="100%"><tr><td align="center">C:\Users\jacob\Documents\NetBeansProjects\FX2\src\events\Line2.java</td></tr></table>
+<pre>
+<span class="comment">/*</span>
+<span class="comment"> * Click </span><span class="ST0">nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt</span><span class="comment"> to change this license</span>
+<span class="comment"> * Click </span><span class="ST0">nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java</span><span class="comment"> to edit this template</span>
+<span class="comment"> */</span>
+<span class="literal">package</span> events;
+
+<span class="literal">import</span> javafx.application.Application;
+<span class="literal">import</span> javafx.scene.Scene;
+<span class="literal">import</span> javafx.scene.layout.Pane;
+<span class="literal">import</span> javafx.scene.paint.Color;
+<span class="literal">import</span> javafx.scene.shape.Line;
+<span class="literal">import</span> javafx.stage.Stage;
+
+<span class="literal">public</span> <span class="literal">class</span> Line2 <span class="literal">extends</span> Application {
+
+    @Override
+    <span class="literal">public</span> <span class="literal">void</span> <span class="ST1">start</span>(Stage primaryStage) {
+        Scene scene = <span class="literal">new</span> Scene(<span class="literal">new</span> LinePane2(), <span class="number">2</span><span class="number">00</span>, <span class="number">2</span><span class="number">00</span>);
+        primaryStage.setTitle(<span class="string">&quot;</span><span class="string">ShowLine</span><span class="string">&quot;</span>);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    <span class="literal">public</span> <span class="literal">static</span> <span class="literal">void</span> <span class="ST2">main</span>(String[] args) {
+        <span class="ST3">launch</span>(args);
+    }
+}
+
+<span class="literal">class</span> LinePane2 <span class="literal">extends</span> Pane {
+
+    <span class="literal">public</span> LinePane2() {
+
+        Line line2 = <span class="literal">new</span> Line(<span class="number">1</span><span class="number">0</span>, <span class="number">1</span><span class="number">0</span>, <span class="number">1</span><span class="number">1</span>, <span class="number">1</span><span class="number">1</span>);
+        line2.endXProperty().bind(<span class="literal">t</span><span class="literal">his</span>.widthProperty().subtract(<span class="number">1</span><span class="number">0</span>));
+        line2.endYProperty().bind(<span class="literal">t</span><span class="literal">his</span>.heightProperty().subtract(<span class="number">1</span><span class="number">0</span>));
+        line2.setStrokeWidth(<span class="number">5</span>);
+        line2.setStroke(Color.<span class="ST4">GREEN</span>);
+        <span class="literal">this</span>.getChildren().add(line2);
+
+        Line line3 = <span class="literal">new</span> Line(<span class="number">1</span><span class="number">0</span>, <span class="number">1</span><span class="number">0</span>, <span class="number">1</span><span class="number">1</span>, <span class="number">1</span><span class="number">1</span>);
+        line3.startXProperty().bind(<span class="literal">t</span><span class="literal">his</span>.widthProperty().subtract(<span class="number">1</span><span class="number">0</span>));
+        line3.endYProperty().bind(<span class="literal">t</span><span class="literal">his</span>.heightProperty().subtract(<span class="number">1</span><span class="number">0</span>));
+        line3.setStrokeWidth(<span class="number">5</span>);
+        line3.setStroke(Color.<span class="ST4">GREEN</span>);
+        <span class="literal">this</span>.getChildren().add(line3);
+
+        Line middleLine = <span class="literal">new</span> Line();
+        middleLine.startXProperty().bind(<span class="literal">t</span><span class="literal">his</span>.widthProperty().divide(<span class="number">2</span>));
+        middleLine.startYProperty().set(<span class="number">0</span>);
+        middleLine.endXProperty().bind(<span class="literal">t</span><span class="literal">his</span>.widthProperty().divide(<span class="number">2</span>));
+        middleLine.endYProperty().bind(heightProperty());
+
+        middleLine.setStrokeWidth(<span class="number">1</span><span class="number">0</span>);
+        middleLine.setStroke(Color.<span class="ST4">RED</span>);
+        <span class="literal">this</span>.getChildren().add(middleLine);
+    }
+}
+
+</pre></body>
+</html>

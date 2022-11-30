@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ImageArray1.java</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+body {color: #a9b7c6; background-color: #2b2b2b; font-family: monospace}
+pre {color: #a9b7c6; background-color: #2b2b2b; font-family: monospace}
+table {color: #888888; background-color: #313335; font-family: monospace}
+.comment {color: #808080}
+.whitespace {color: #505050}
+.ST2 {color: #ffc66d; font-family: monospace; font-style: italic}
+.string {color: #6a8759}
+.number {color: #6897bb}
+.ST1 {color: #ffc66d}
+.ST0 {color: #287bde}
+.ST3 {font-family: monospace; font-style: italic}
+.literal {color: #cc7832}
+-->
+</style>
+</head>
+<body>
+<table width="100%"><tr><td align="center">C:\Users\jacob\Documents\NetBeansProjects\FX2\src\events\ImageArray1.java</td></tr></table>
+<pre>
+<span class="comment">/*</span>
+<span class="comment"> * Click </span><span class="ST0">nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt</span><span class="comment"> to change this license</span>
+<span class="comment"> * Click </span><span class="ST0">nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java</span><span class="comment"> to edit this template</span>
+<span class="comment"> */</span>
+<span class="literal">package</span> events;
+
+<span class="literal">import</span> javafx.application.Application;
+<span class="literal">import</span> javafx.geometry.Insets;
+<span class="literal">import</span> javafx.scene.Scene;
+<span class="literal">import</span> javafx.scene.image.ImageView;
+<span class="literal">import</span> javafx.scene.layout.HBox;
+<span class="literal">import</span> javafx.scene.layout.Pane;
+<span class="literal">import</span> javafx.stage.Stage;
+
+<span class="literal">public</span> <span class="literal">class</span> ImageArray1 <span class="literal">extends</span> Application {
+
+    @Override
+    <span class="literal">public</span> <span class="literal">void</span> <span class="ST1">start</span>(Stage primaryStage) {
+
+        ImageView[] images = <span class="literal">new</span> ImageView[]{
+            <span class="literal">new</span> ImageView(<span class="string">&quot;</span><span class="string">images/us.gif</span><span class="string">&quot;</span>),
+            <span class="literal">new</span> ImageView(<span class="string">&quot;</span><span class="string">images/ca.gif</span><span class="string">&quot;</span>),
+            <span class="literal">new</span> ImageView(<span class="string">&quot;</span><span class="string">images/dn.gif</span><span class="string">&quot;</span>),
+            <span class="literal">new</span> ImageView(<span class="string">&quot;</span><span class="string">images/uk.gif</span><span class="string">&quot;</span>),
+            <span class="literal">new</span> ImageView(<span class="string">&quot;</span><span class="string">images/fr.gif</span><span class="string">&quot;</span>),
+            <span class="literal">new</span> ImageView(<span class="string">&quot;</span><span class="string">images/dl.gif</span><span class="string">&quot;</span>),
+            <span class="literal">new</span> ImageView(<span class="string">&quot;</span><span class="string">images/ch.gif</span><span class="string">&quot;</span>)
+        };
+
+        Pane hb = <span class="literal">new</span> HBox(<span class="number">1</span><span class="number">0</span>);
+        hb.setPadding(<span class="literal">new</span> Insets(<span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>));
+
+        <span class="literal">for</span> (<span class="literal">int</span> i = <span class="number">0</span>; i &lt; <span class="number">7</span>; ++i) {
+            images[i].setFitWidth(<span class="number">1</span><span class="number">50</span>);
+            images[i].setFitHeight(<span class="number">1</span><span class="number">00</span>);
+            hb.getChildren().add(images[i]);
+        }
+        Scene scene = <span class="literal">new</span> Scene(hb);
+        primaryStage.setTitle(<span class="string">&quot;</span><span class="string">Flags</span><span class="string">&quot;</span>);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    <span class="literal">public</span> <span class="literal">static</span> <span class="literal">void</span> <span class="ST2">main</span>(String[] args) {
+        <span class="ST3">launch</span>(args);
+    }
+}
+
+</pre></body>
+</html>

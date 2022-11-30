@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Person</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            Hello from Facelets
+            <br />
+            <h:outputText value="#{person.firstName}" />
+            <br />
+            <h:outputText value="#{person.lastName}" />
+            <br />
+            <h:outputText value="#{person.birth.birthday}" />
+            <br />
+            <h:outputText value="#{person.birth.birthplace}" />
+            <br />
+            <h:outputText value="#{person.twin.twin}" />
+            <p>ALTERNATIVE NOTATION TO REFERENCE BEANS</p>
+            #{person['firstName']}
+            #{person['lastName']}
+            #{person['birth']['birthday']}
+            #{person['birth']['birthplace']}
+            <br/>
+            birthplace
+            <h:inputText value="#{person['birth']['birthplace']}" />
+            <br/>
+            <h:inputText value="#{person['birth']['birthplace']}" />
+            <br/>
+            <h:inputText value="#{person.birth.birthplace}" />
+        </h:form>
+    </h:body>
+</html>
+

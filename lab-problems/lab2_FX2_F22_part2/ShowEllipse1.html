@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ShowEllipse1.java</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+body {color: #a9b7c6; background-color: #2b2b2b; font-family: monospace}
+pre {color: #a9b7c6; background-color: #2b2b2b; font-family: monospace}
+table {color: #888888; background-color: #313335; font-family: monospace}
+.comment {color: #808080}
+.whitespace {color: #505050}
+.ST2 {color: #ffc66d; font-family: monospace; font-style: italic}
+.ST4 {color: #9876aa; font-family: monospace; font-style: italic}
+.number {color: #6897bb}
+.string {color: #6a8759}
+.ST1 {color: #ffc66d}
+.ST0 {color: #287bde}
+.ST3 {font-family: monospace; font-style: italic}
+.literal {color: #cc7832}
+-->
+</style>
+</head>
+<body>
+<table width="100%"><tr><td align="center">C:\Users\jacob\Documents\NetBeansProjects\FX2\src\events\ShowEllipse1.java</td></tr></table>
+<pre>
+<span class="comment">/*</span>
+<span class="comment"> * Click </span><span class="ST0">nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt</span><span class="comment"> to change this license</span>
+<span class="comment"> * Click </span><span class="ST0">nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java</span><span class="comment"> to edit this template</span>
+<span class="comment"> */</span>
+<span class="literal">package</span> events;
+
+<span class="literal">import</span> javafx.application.Application;
+<span class="literal">import</span> javafx.scene.Scene;
+<span class="literal">import</span> javafx.scene.layout.Pane;
+<span class="literal">import</span> javafx.scene.paint.Color;
+<span class="literal">import</span> javafx.scene.shape.Ellipse;
+<span class="literal">import</span> javafx.stage.Stage;
+
+<span class="literal">public</span> <span class="literal">class</span> ShowEllipse1 <span class="literal">extends</span> Application {
+    
+    @Override
+    <span class="literal">public</span> <span class="literal">void</span> <span class="ST1">start</span>(Stage primaryStage) {
+        Scene scene = <span class="literal">new</span> Scene(<span class="literal">new</span> My32Ellipses(), <span class="number">8</span><span class="number">00</span>, <span class="number">6</span><span class="number">00</span>);
+        primaryStage.setTitle(<span class="string">&quot;</span><span class="string">Show 32 Ellipses</span><span class="string">&quot;</span>);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+    
+    <span class="literal">public</span> <span class="literal">static</span> <span class="literal">void</span> <span class="ST2">main</span>(String[] args) {
+        <span class="ST3">launch</span>(args);
+    }
+}
+
+<span class="literal">class</span> My32Ellipses <span class="literal">extends</span> Pane {
+    
+    <span class="literal">private</span> <span class="literal">void</span> <span class="ST1">paint32Ellipses</span>() {
+        getChildren().clear();
+        <span class="literal">for</span> (<span class="literal">int</span> i = <span class="number">0</span>; i &lt; <span class="number">32</span>; i++) {
+            Ellipse e1 = <span class="literal">new</span> Ellipse(getWidth() / <span class="number">2</span>, getHeight() / <span class="number">2</span>, getWidth() / <span class="number">2</span> - <span class="number">120</span>, getHeight() / <span class="number">2</span> - <span class="number">120</span>);
+            e1.setStroke(Color.<span class="ST3">color</span>(Math.<span class="ST3">random</span>(), Math.<span class="ST3">random</span>(), Math.<span class="ST3">random</span>()));
+            e1.setFill(Color.<span class="ST4">WHITE</span>);
+            e1.setRotate(i * <span class="number">180</span> / <span class="number">32</span>);
+            getChildren().add(e1);
+        }
+    }
+    @Override <span class="literal">public</span> <span class="literal">void</span> <span class="ST1">setWidth</span>(<span class="literal">double</span> width)
+    {
+        <span class="literal">super</span>.setWidth(width); paint32Ellipses();
+    }
+    @Override <span class="literal">public</span> <span class="literal">void</span> <span class="ST1">setHeight</span>(<span class="literal">double</span> height)
+    {
+        <span class="literal">super</span>.setHeight(height);
+        paint32Ellipses();
+    }
+}
+
+</pre></body>
+</html>

@@ -1,0 +1,138 @@
+﻿run:
+------------------------------ 
+Test Work
+------------------------------ 
+java.lang.NullPointerException: null parameter
+test add
+------------------------------ 
+test toString
+ArrayListASDV[10 20 ]
+ArrayListASDV[a b c d ]
+ArrayListASDV[A1{x=-1} A1{x=-2} ]
+------------------------------ 
+test contains
+java.lang.IndexOutOfBoundsException: 30 out of bounds
+contains E
+contains c: true
+contains null: false
+contains k: false
+ArrayListASDV[a b c d ]
+contains A(-1): true
+contains A(-3): false
+java.lang.IndexOutOfBoundsException: 12 is out of bounds
+------------------------------ 
+test toArray(): [ a b c d  ] 
+
+---------------------------------------
+test clear()
+ArrayListASDV[]
+
+---------------------------------------
+test size
+0
+
+---------------------------------------
+test add(index, element)
+current array size:8
+current array size:16
+current array size:32
+ArrayListASDV[A B C D E F G H I J K L M N O P Q R S T U V W X Y Z ]
+ArrayListASDV[A B C D E F G H I J K L M N O P Q R S T U V W X Y Z z ]
+ArrayListASDV[A B C D E F G H I J K L M N O P Q R S T U V W X Y y Z z ]
+
+---------------------------------------
+test remove(index)
+z
+ArrayListASDV[A B C D E F G H I J K L M N O P Q R S T U V W X Y y Z ]
+
+---------------------------------------
+test remove(Object)
+ArrayListASDV[A B C D E F G H I J K L M N O P Q R S T U V W X Y Z ]
+false
+
+---------------------------------------
+test set(index, Object)
+ArrayListASDV[0 B C D E F G H I J K L M N O P Q R S T U V W X Y 25 ]
+
+---------------------------------------
+test indexOf()
+0
+1
+25
+24
+-1
+
+---------------------------------------
+test lastindexOf()
+0
+10
+-1
+ArrayListASDV[0 B C D E F G H I J 0 K L M N O P Q R S T U V W X Y 25 ]
+
+---------------------------------------
+test sublist(from, to)
+ArrayListASDV[B C D E F G H I J ]
+ArrayListASDV[K L M N O P Q R S T U V W X Y ]
+ArrayListASDV[]
+
+---------------------------------------
+test toArray()
+K L M N O P Q R S T U V W X Y 
+---------------------------------------
+test toArray(T[] a) small size a
+10
+20
+null
+null
+
+---------------------------------------
+test toArray(T[] a) Big size a
+A1{x=100}
+null
+null
+
+
+---------------------------------------
+test Iterator()
+ArrayListASDV[0 B C D E F G H I J 0 K L M N O P Q R S T U V W X Y 25 ]
+0 B C D E F G H I J 0 K L M N O P Q R S T U V W X Y 25 
+
+---------------------------------------
+test ListIterator1()
+ArrayListASDV[10 20 30 40 ]
+	next index: 2	previous index: 1	30	next index: 3	previous index: 2	40
+	next index: 4	previous index: 3	40	next index: 3	previous index: 2	30	next index: 2	previous index: 1	20	next index: 1	previous index: 0	10
+next index: 0
+previous index: -1
+
+---------------------------------------
+test forEachRemaining()
+10
+21 31 41 
+---------------------------------------
+test containsAll(Collection)
+true
+false
+
+---------------------------------------
+test removeAll(Collection)
+ArrayListASDV[10 20 30 40 10 11 10 ]
+true
+ArrayListASDV[20 30 40 11 ]
+ArrayListASDV[20 30 11 ]
+java.lang.ClassCastException: Incompatible types: java.lang.Integer, java.lang.Double
+ArrayListASDV[20 30 11 ]
+
+java.lang.ClassCastException: Incompatible types: java.lang.Integer, withCode.A1
+---------------------------------------
+test retainAll(Collection)
+ArrayListASDV[30 ]
+
+---------------------------------------
+test addAll(Collection)
+ArrayListASDV[30 1 2 3 4 ]
+
+---------------------------------------
+test addAll(index, Collection)
+ArrayListASDV[30 1 100 200 300 2 3 4 ]
+BUILD SUCCESSFUL (total time: 0 seconds)
