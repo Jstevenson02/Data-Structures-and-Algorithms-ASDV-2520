@@ -149,7 +149,10 @@ public interface Table<E> {
      * @return true if the row was moved successfully, false otherwise
      */
     boolean moveRow(int from, int to);
+<<<<<<< HEAD
 
     E[][] tableToArray(E[][] ar);
 
+=======
+>>>>>>> 5cdcefb9ddb0176baf54b5dd787c6f3f2063f567
 }

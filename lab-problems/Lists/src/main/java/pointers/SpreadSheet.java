@@ -1,7 +1,10 @@
 package pointers;
 
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.Arrays;
+=======
+>>>>>>> 5cdcefb9ddb0176baf54b5dd787c6f3f2063f567
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -12,6 +15,7 @@ public class SpreadSheet<E> implements Table<E>, Cloneable {
 
     private Node<E> startNode;//points to node at position 0,0
 
+<<<<<<< HEAD
     @Override
     public E[][] tableToArray(E[][] ar) {
         //        Class<?> clazz = this.startNode.e.getClass();
@@ -28,6 +32,8 @@ public class SpreadSheet<E> implements Table<E>, Cloneable {
         return a;
     }
 
+=======
+>>>>>>> 5cdcefb9ddb0176baf54b5dd787c6f3f2063f567
     static class Node<E> {
 
         E e;
@@ -42,8 +48,13 @@ public class SpreadSheet<E> implements Table<E>, Cloneable {
      * Creates a rows x columns table
      *
      * @param rows number of roes
+<<<<<<< HEAD
      * @param columns number of columns #thows IllegalArgumentException if
      * rows/columns are not GT zero.
+=======
+     * @param columns number of columns #thows IllegalArgumentException if rows/columns are not GT
+     * zero.
+>>>>>>> 5cdcefb9ddb0176baf54b5dd787c6f3f2063f567
      * @return true if the table was created successfully, false otherwise
      */
     public boolean createTable(int rows, int columns) {
@@ -166,12 +177,20 @@ public class SpreadSheet<E> implements Table<E>, Cloneable {
             newNode.left = rowNode.left;
             newNode.right = rowNode;
             rowNode.left = newNode;
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> 5cdcefb9ddb0176baf54b5dd787c6f3f2063f567
             if (r > 0 && index == 0) {
                 newNode.up = newNode.right.up.left;
                 newNode.up.down = newNode;
             }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5cdcefb9ddb0176baf54b5dd787c6f3f2063f567
             rowNode = newNode;
 
             if (index == 0 && r == 0) {
