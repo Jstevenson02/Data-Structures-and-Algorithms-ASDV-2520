@@ -1,10 +1,7 @@
 package pointers;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
 import java.util.Arrays;
-=======
->>>>>>> 5cdcefb9ddb0176baf54b5dd787c6f3f2063f567
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,7 +12,6 @@ public class SpreadSheet<E> implements Table<E>, Cloneable {
 
     private Node<E> startNode;//points to node at position 0,0
 
-<<<<<<< HEAD
     @Override
     public E[][] tableToArray(E[][] ar) {
         //        Class<?> clazz = this.startNode.e.getClass();
@@ -32,8 +28,6 @@ public class SpreadSheet<E> implements Table<E>, Cloneable {
         return a;
     }
 
-=======
->>>>>>> 5cdcefb9ddb0176baf54b5dd787c6f3f2063f567
     static class Node<E> {
 
         E e;
@@ -48,13 +42,10 @@ public class SpreadSheet<E> implements Table<E>, Cloneable {
      * Creates a rows x columns table
      *
      * @param rows number of roes
-<<<<<<< HEAD
      * @param columns number of columns #thows IllegalArgumentException if
      * rows/columns are not GT zero.
-=======
-     * @param columns number of columns #thows IllegalArgumentException if rows/columns are not GT
-     * zero.
->>>>>>> 5cdcefb9ddb0176baf54b5dd787c6f3f2063f567
+     * @param columns number of columns #thows IllegalArgumentException if
+     * rows/columns are not GT zero.
      * @return true if the table was created successfully, false otherwise
      */
     public boolean createTable(int rows, int columns) {
@@ -177,20 +168,11 @@ public class SpreadSheet<E> implements Table<E>, Cloneable {
             newNode.left = rowNode.left;
             newNode.right = rowNode;
             rowNode.left = newNode;
-<<<<<<< HEAD
-
-=======
-            
->>>>>>> 5cdcefb9ddb0176baf54b5dd787c6f3f2063f567
             if (r > 0 && index == 0) {
                 newNode.up = newNode.right.up.left;
                 newNode.up.down = newNode;
             }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 5cdcefb9ddb0176baf54b5dd787c6f3f2063f567
             rowNode = newNode;
 
             if (index == 0 && r == 0) {
@@ -539,28 +521,42 @@ public class SpreadSheet<E> implements Table<E>, Cloneable {
 
     public static void main(String[] args) {
         SpreadSheet sp = new SpreadSheet<Integer>();
-        sp.createTable(4, 4);
-
-        sp.setCell(1, 0, 0);
-        sp.setCell(1, 1, 0);
-        sp.setCell(1, 2, 0);
-        sp.setCell(1, 3, 0);
-
-        sp.setCell(1, 0, 1);
-        sp.setCell(0, 1, 1);
-        sp.setCell(0, 2, 1);
-        sp.setCell(0, 3, 1);
-
-        sp.setCell(1, 0, 2);
-        sp.setCell(0, 1, 2);
-        sp.setCell(0, 2, 2);
-        sp.setCell(0, 3, 2);
-
-        sp.setCell(1, 0, 3);
-        sp.setCell(0, 1, 3);
-        sp.setCell(0, 2, 3);
-        sp.setCell(0, 3, 3);
-
+//        sp.createTable(4, 4);
+//
+//        sp.setCell(1, 0, 0);
+//        sp.setCell(1, 1, 0);
+//        sp.setCell(1, 2, 0);
+//        sp.setCell(1, 3, 0);
+//
+//        sp.setCell(1, 0, 1);
+//        sp.setCell(0, 1, 1);
+//        sp.setCell(0, 2, 1);
+//        sp.setCell(0, 3, 1);
+//
+//        sp.setCell(1, 0, 2);
+//        sp.setCell(0, 1, 2);
+//        sp.setCell(0, 2, 2);
+//        sp.setCell(0, 3, 2);
+//
+//        sp.setCell(1, 0, 3);
+//        sp.setCell(0, 1, 3);
+//        sp.setCell(0, 2, 3);
+//        sp.setCell(0, 3, 3);
+//        
+           sp.createTable(4, 5);
+        for (int i = 0; i < 4; ++i)
+          {
+            for (int j = 0; j < 5; ++j)
+              {
+                sp.setCell((Object) Math.pow(i + 2, j + 1), i, j);
+              }
+          }
+        System.out.println(sp);
+        sp.insertColumn(2);
+        System.out.println(sp);
+    }
+}
+/*
         System.out.println("\n" + "------------------------------Original Table------------------------------------");
         System.out.println(sp);
 
@@ -653,3 +649,4 @@ public class SpreadSheet<E> implements Table<E>, Cloneable {
 
     }
 }
+*/
